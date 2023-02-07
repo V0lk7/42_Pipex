@@ -6,7 +6,7 @@
 #    By: jduval <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/02 13:27:39 by jduval            #+#    #+#              #
-#    Updated: 2023/02/07 12:11:06 by jduval           ###   ########.fr        #
+#    Updated: 2023/02/07 16:22:55 by jduval           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,7 +69,7 @@ $(BUILD_DIR)/%.o : %.c
 	@$(DIRDUP)
 	@$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
--include $(DEPS)
+#-include $(DEPS)
 
 #bonus: 
 #	$(MAKE) BONUS=1 all
