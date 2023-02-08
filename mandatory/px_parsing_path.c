@@ -1,23 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   px_parsing_path.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/07 08:41:01 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/08 15:20:51 by jduval           ###   ########.fr       */
+/*   Created: 2023/02/08 10:04:43 by jduval            #+#    #+#             */
+/*   Updated: 2023/02/08 14:02:59 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
 
-int	main(int argc, char **argv, char **envp)
+int	ft_find_path(char **envp)
 {
-	if (argc != 5)
+	int	i;
+
+	i = 0;
+	while (envp[i] != NULL)
 	{
-		ft_printf("ERROR\nPathern: ./pipex 'file1' 'cmd1' 'cmd2' 'file2'\n");
-		return (0);
+		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
+			return (i);
+		i++;
 	}
-	return (0);
+	return (-1);
+}
+
+char	**ft_envp_to_path(char **envp)
+{
+	char	**path;
+	int		index;
+	
+	index = ft_find_path(envp);
+	if (index == -1)
+	{
+		ft_printf("PATH not found\n");
+		exit (0);
+	}
+	path = ft_split(envp[index], ':');
+	if (path == NULL)
+		exit (0);
+	return (path);
 }

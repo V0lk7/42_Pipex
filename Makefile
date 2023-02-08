@@ -6,76 +6,48 @@
 #    By: jduval <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/02 13:27:39 by jduval            #+#    #+#              #
-#    Updated: 2023/02/07 16:22:55 by jduval           ###   ########.fr        #
+#    Updated: 2023/02/08 15:15:44 by jduval           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-#ifdef BONUS
-#NAME 		:=	pipex_bonus
-#else
-NAME 		=	pipex
-#endif
+NAME		:=	pipex
 
 MAKEFLAGS	+=	--no-print-directory
 
-###############################################################################
+SRC_DIR		:=	mandatory
 
-LIBS 		:=	ft
+SRCS		:=	main.c	\
+				px_parsing_path.c	\
+				px_parsing_files.c	\
 
-LIBS_TARGET :=	libft/libft.a	\
+SRCS		:=	$(SRCS:%=$(SRC_DIR)/%)
 
-INCLUDES	:=	libft/include 	\
+BUILD_DIR	:=	.build
 
-###############################################################################
+OBJS		:=	$(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
 
-BUILD_DIR 	:= 	.build
+DEPS		:=	$(OBJS:.o=.d)
 
-SRCS_DIR	:=	mandatory
+CC			:=	clang
 
-SRCS 		:=	main.c	\
+CFLAGS		:=	-Werror -Wall
 
-SRCS 		:=	$(SRCS:%=$(SRCS_DIR)/%)
-
-OBJS 		:=	$(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
-
-DEPS 		:=	$(OBJS:.o=.d)
-
-###############################################################################
-
-CC 			=	clang
-
-CFLAGS 		= 	-Werror -Wextra -Wall -ggdb3 -O3
-
-CPPFLAGS 	=	-MMD -MP $(addprefix -I,$(INCLUDES))
-
-LDFLAGS		=	$(addprefix -L,$(dir $(LIBS_TARGET)))
-
-LDLIBS		=	$(addprefix -l,$(LIBS))
-
-DIRDUP 		= 	mkdir -p $(@D) 
-
-###############################################################################
+DIR_DUP		=	mkdir -p $(@D)
 
 all: $(NAME)
+.PHONY: all
 
-$(NAME): $(OBJS) $(LIBS_TARGET)
-	@$(CC) $(LDFLAGS) $(OBJS) $(LDLIBS) -o $(NAME)
-	$(info CREATED $(NAME))
+$(NAME): $(OBJS)
+	@${MAKE} -C libft/
+	@$(CC) $(CFLAGS) $(OBJS) libft/libft.a -o $@
+	$(info CREATED $@)
 
-$(LIBS_TARGET):
-	@$(MAKE) -C $(dir $@)
+$(BUILD_DIR)/%.o : $(SRC_DIR)/%.c
+	@$(DIR_DUP)
+	@$(CC) $(CFLAGS) -c -o $@ $<
+	$(info CREATED $@)
 
-$(BUILD_DIR)/%.o : %.c
-	@$(DIRDUP)
-	@$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
-
-#-include $(DEPS)
-
-#bonus: 
-#	$(MAKE) BONUS=1 all
-#.PHONY:bonus
-
-###############################################################################
+-include $(DEPS) 
 
 clean:
 	@${MAKE} -C libft/ clean
@@ -84,7 +56,7 @@ clean:
 
 fclean: clean 
 	@${MAKE} -C libft/ fclean
-	rm -f pipex pipex_bonus
+	rm -f $(NAME)
 .PHONY: fclean
 
 re: fclean all

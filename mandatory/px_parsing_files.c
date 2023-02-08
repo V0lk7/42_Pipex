@@ -6,13 +6,13 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 16:58:35 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/07 17:14:08 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/08 16:26:19 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../include/pipex.h"
 
-t_bool	ft_infile(char **argv)
+t_file	ft_infile(char **argv)
 {
 	int	fd;
 	int	flag;
@@ -22,15 +22,15 @@ t_bool	ft_infile(char **argv)
 	if (fd == -1)
 	{
 		perror(NULL);
-		return (TRUE);
+		return (NO_INFILE);
 	}
 	flag = close(fd);
 	if (flag == -1)
 	{
 		perror(NULL);
-		return (FALSE);
+		return (ERROR);
 	}
-	return (TRUE);
+	return (INFILE);
 }
 
 t_bool	ft_outfile(int argc, char **argv)
@@ -54,15 +54,16 @@ t_bool	ft_outfile(int argc, char **argv)
 	return (TRUE);
 }
 
-void	ft_files(int argc, char **argv)
+t_file	ft_files(int argc, char **argv)
 {
-	int	flag;
+	t_file	infile;
+	t_bool	flag;
 
-	flag = ft_infile(argv);
-	if (flag == FALSE)
+	infile = ft_infile(argv);
+	if (infile == ERROR)
 		exit (0);
 	flag = ft_outfile(argc, argv);
 	if (flag == FALSE)
 		exit(0);
-	return ;
+	return (infile);
 }
