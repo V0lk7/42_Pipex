@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:37:20 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/08 16:06:21 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/09 11:05:44 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_cmd	*ft_new_node(char **tab, int flag)
 	if (new == NULL)
 		return (NULL);
 	new->cmd = tab;
-	new->error = error;
+	new->error = flag;
 	new->next = NULL;
 	return (new);
 }

@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   px_parsing.c                                       :+:      :+:    :+:   */
+/*   px_init_list.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/07 13:54:48 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/09 14:56:15 by jduval           ###   ########.fr       */
+/*   Created: 2023/02/09 14:58:12 by jduval            #+#    #+#             */
+/*   Updated: 2023/02/09 16:07:15 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
 
-t_cmd	ft_parsing(int argc, char **argv, char **envp)
+t_cmd	*ft_create_chain(int argc, t_file file, char **argv, char **path)
 {
-	t_cmd	*cmd;
-	char	**path;
-	t_file	file;
+	int	i;
 
-	file = ft_files(argc, argv);
-	if (file == ERROR)
-		exit(0);
-	path = ft_envp_to_path(envp);
-	cmd = ft_create_chain(argc, file, argv, path);
+	if (file == NO_INFILE)
+		i = 3;
+	else
+		i = 2;
+	
 }

@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:23:49 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/08 15:33:26 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/09 11:05:18 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_free_all_cmd(t_cmd *head)
 	{
 		tmp = head;
 		head = head->next;
-		if (tmp->tab != NULL)
+		if (tmp->cmd != NULL)
 			ft_free_tab(tmp->cmd);
 		free(tmp);
 	}

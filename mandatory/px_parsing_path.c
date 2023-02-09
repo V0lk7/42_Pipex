@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 10:04:43 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/08 14:02:59 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/09 18:20:39 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,24 @@ int	ft_find_path(char **envp)
 	return (-1);
 }
 
+char	*ft_remake_path(char *envp)
+{
+	char	*str;
+	int		len;
+
+	if (envp == NULL)
+		return (NULL);
+	len = ft_strlen(envp);
+	str = ft_substr(envp, 5, len);
+	if (str == NULL)
+		return (NULL);
+	return (str);
+}
+
 char	**ft_envp_to_path(char **envp)
 {
 	char	**path;
+	char	*str;
 	int		index;
 	
 	index = ft_find_path(envp);
@@ -37,7 +52,11 @@ char	**ft_envp_to_path(char **envp)
 		ft_printf("PATH not found\n");
 		exit (0);
 	}
-	path = ft_split(envp[index], ':');
+	str = ft_remake_path(envp[index]);
+	if (str == NULL)
+		exit (0);
+	path = ft_split(str, ':');
+	free(str);
 	if (path == NULL)
 		exit (0);
 	return (path);

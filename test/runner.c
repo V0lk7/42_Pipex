@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   px_parsing.c                                       :+:      :+:    :+:   */
+/*   runner.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/07 13:54:48 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/09 14:56:15 by jduval           ###   ########.fr       */
+/*   Created: 2023/01/06 08:34:48 by jduval            #+#    #+#             */
+/*   Updated: 2023/02/09 17:34:30 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex.h"
+#include "greatest.h"
 
-t_cmd	ft_parsing(int argc, char **argv, char **envp)
+SUITE(list_suit);
+SUITE(file_test);
+SUITE(path_test);
+
+GREATEST_MAIN_DEFS();
+
+int	main(int argc, char **argv)
 {
-	t_cmd	*cmd;
-	char	**path;
-	t_file	file;
+	GREATEST_MAIN_BEGIN();      /* command-line options, initialization. */
 
-	file = ft_files(argc, argv);
-	if (file == ERROR)
-		exit(0);
-	path = ft_envp_to_path(envp);
-	cmd = ft_create_chain(argc, file, argv, path);
+	/* Tests can also be gathered into test suites. */
+	RUN_SUITE(list_suit);
+	RUN_SUITE(file_test);
+	RUN_SUITE(path_test);
+
+	GREATEST_MAIN_END();        /* display results */
 }
