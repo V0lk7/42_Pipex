@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 17:00:24 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/09 18:20:07 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/10 23:58:37 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ TEST	remake_path(void)
 TEST	envp_path(void)
 {
 	char	*tab1[] = {"hey", "boy", "PATH=je:suis", "general", NULL};
-	char	*tab2[] = {"je", "suis", NULL};
+	char	*tab2[] = {"je/", "suis/", NULL};
 	int		i = 0;
 	tab = ft_envp_to_path(tab1);
 

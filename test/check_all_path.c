@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 17:11:33 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/10 17:38:35 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/11 00:14:39 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 
 static char	*str;
 static char	**tab;
-static char *envp[] = {"/nfs/homes/jduval/.local/bin",
-						"/nfs/homes/jduval/bin",
-						"/usr/local/sbin",
-						"/usr/local/bin",
-						"/usr/sbin",
-						"/usr/bin",
-						"/bin",
-						"/usr/games",
-						"/usr/local/games",
-						"/snap/bin",	
+static char *envp[] = {"/nfs/homes/jduval/.local/bin/",
+						"/nfs/homes/jduval/bin/",
+						"/usr/local/sbin/",
+						"/usr/local/bin/",
+						"/usr/sbin/",
+						"/usr/bin/",
+						"/bin/",
+						"/usr/games/",
+						"/usr/local/games/",
+						"/snap/bin/",	
 						NULL};
 
 static void	setup(void *data)

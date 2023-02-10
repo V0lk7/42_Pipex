@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 15:44:32 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/10 16:45:54 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/11 00:12:44 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ char	*ft_only_cmd(char *str)
 
 	i = 0;
 	len = 0;
-	if (str == NULL)
-		return (NULL);
 	while (str[len] && str[len] != ' ')
 		len++;
 	cmd = ft_calloc(sizeof(char), len + 1);
@@ -57,7 +55,7 @@ char	**ft_check_all_path(char *str, char *cmd, char **path)
 	i = 0;
 	while (path[i] != NULL)
 	{
-		cmd = ft_strjoin_free(cmd, path[i]);
+		cmd = ft_strjoin_free_s2(path[i], cmd);
 		if (cmd == NULL)
 			return (NULL);
 		value = access(cmd, F_OK);

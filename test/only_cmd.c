@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 16:26:50 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/10 16:55:42 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/11 00:10:33 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,6 @@ TEST	str_empty(void)
 	PASS();
 }
 
-TEST	str_null(void)
-{
-	str = ft_only_cmd(NULL);
-	if (str == NULL)
-		ASSERT_EQ(1, 1);
-	else
-		ASSERT_EQ(1, 0);
-	PASS();
-}
-
 SUITE (only_cmd)
 {
 	SET_SETUP(setup, NULL);
@@ -66,5 +56,4 @@ SUITE (only_cmd)
 	RUN_TEST(full_str1);
 	RUN_TEST(full_str2);
 	RUN_TEST(str_empty);
-	RUN_TEST(str_null);
 }

@@ -1,5 +1,5 @@
-libft/.build
+libft/.build_libft
 pipex
 libft/libft.a
-.build
+.build_pipex
 mandatory/a.out
