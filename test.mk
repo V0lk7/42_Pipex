@@ -6,7 +6,7 @@
 #    By: jduval <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/09 10:53:32 by jduval            #+#    #+#              #
-#    Updated: 2023/02/09 16:39:20 by jduval           ###   ########.fr        #
+#    Updated: 2023/02/10 14:10:17 by jduval           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,11 +38,11 @@ test: clear fclean rclean $(RUNNER)
 .PHONY: test
 
 run:	
-	./test/greatest_parallel -v ./test/test
+	cd test/ && ./greatest_parallel -v ./test
 .PHONY: run
 
 gdb:
-	gdb -args ./test/test
+	cd test/ && gdb -args ./test
 .PHONY: gdb
 
 .PHONY: test

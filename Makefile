@@ -6,7 +6,7 @@
 #    By: jduval <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/02 13:27:39 by jduval            #+#    #+#              #
-#    Updated: 2023/02/09 14:44:00 by jduval           ###   ########.fr        #
+#    Updated: 2023/02/10 16:28:51 by jduval           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ INCLUDES	=	libft/include
 
 ###############################################################################
 
-BUILD_DIR 	= 	.build
+BUILD_DIR 	= 	.build_pipex
 
 SRC_DIR		=	mandatory
 
@@ -32,6 +32,8 @@ SRCS 		:=	main.c	\
 				px_free.c	px_list_utils.c	\
 				px_parsing_files.c	\
 				px_parsing_path.c	\
+				px_parse_cmd.c	\
+				px_init_list.c	\
 
 SRCS		:= $(SRCS:%=$(SRC_DIR)/%)
 
@@ -64,7 +66,7 @@ $(NAME): $(OBJS) $(LIBS_TARGET)
 	$(info CREATED $(NAME))
 
 $(LIBS_TARGET):
-	@$(MAKE) -C $(dir $@)
+	$(MAKE) -C $(dir $@)
 
 $(BUILD_DIR)/%.o : %.c
 	@$(DIRDUP)
@@ -80,7 +82,7 @@ bonus:
 
 clean:
 	@${MAKE} -C libft/ clean
-	rm -rf .build
+	rm -rf .build_pipex
 .PHONY:clean
 
 fclean: clean 

@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 12:07:22 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/09 17:05:53 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/10 14:57:21 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,9 @@ t_cmd	*ft_init_link(void)
 	char	*tab[] = {"hello", NULL};
 	char	*tab1[] = {"there", NULL};
 	char	*tab2[] = {"general", NULL};
-	int		a = 0;
-	int		b = 1;
-	int		c = 2;
-	ptr = ft_new_node(tab, a);
-	ptr1 = ft_new_node(tab1, b);
-	ptr2 = ft_new_node(tab2, c);
+	ptr = ft_new_node(tab);
+	ptr1 = ft_new_node(tab1);
+	ptr2 = ft_new_node(tab2);
 	ptr->next = ptr1;
 	ptr1->next = ptr2;
 	ptr2->next = NULL;
@@ -56,11 +53,9 @@ t_cmd	*ft_init_link(void)
 TEST	new_node(void)
 {
 	char	*tab[] = {"hello", NULL};
-	int		a = 0;
 	
-	ptr = ft_new_node(tab, a); 
+	ptr = ft_new_node(tab); 
 	ASSERT_STR_EQ("hello", ptr->cmd[0]);
-	ASSERT_EQ(0, ptr->error);
 	PASS();
 }
 
@@ -70,7 +65,6 @@ TEST	last_node(void)
 
 	tmp = ft_last_node(tmp);
 	ASSERT_STR_EQ("general", "general");
-	ASSERT_EQ(2, tmp->error);
 	PASS();;
 }
 
@@ -78,27 +72,22 @@ TEST	add_node_full(void)
 {
 	char	*tab[] = {"hello", NULL};
 	char	*tab2[] = {"there", NULL};
-	int		a = 0;
-	int		b = 1;
-	ptr = ft_new_node(tab, a);
-	ptr1 = ft_new_node(tab2, b);
+	ptr = ft_new_node(tab);
+	ptr1 = ft_new_node(tab2);
 
 	ft_add_back_node(&ptr, ptr1);
 	ASSERT_STR_EQ("there", ptr->next->cmd[0]);
-	ASSERT_EQ(1, ptr->next->error);
 	PASS();
 }
 
 TEST	add_node_empty(void)
 {
 	char	*tab[] = {"hello", NULL};
-	int		a = 0;
-	ptr1 = ft_new_node(tab, a);
+	ptr1 = ft_new_node(tab);
 	t_cmd	*tmp = NULL;
 
 	ft_add_back_node(&tmp, ptr1);
 	ASSERT_STR_EQ("hello", tmp->cmd[0]);
-	ASSERT_EQ(0, tmp->error);
 	PASS();
 }
 

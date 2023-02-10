@@ -6,7 +6,7 @@
 #    By: jduval <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/03 13:18:12 by jduval            #+#    #+#              #
-#    Updated: 2023/01/11 16:20:35 by jduval           ###   ########.fr        #
+#    Updated: 2023/02/10 15:56:54 by jduval           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ DIRDUP		= mkdir -p $(@D)
 
 SRC_DIR		:= functions
 
-BUILD_DIR	:= .build
+BUILD_DIR	:= .build_libft
 
 SRCS 		:=	libft/ft_bzero.c	   	libft/ft_isdigit.c \
 				libft/ft_isalnum.c	   	libft/ft_isascii.c \
