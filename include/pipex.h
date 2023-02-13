@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 12:15:13 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/10 23:57:37 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/13 17:56:26 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	**ft_envp_to_path(char **envp);
 //								px_free.c									//
 //////////////////////////////////////////////////////////////////////////////
 void	ft_free_tab(char **tab);
-void	ft_free_all_cmd(t_cmd *head);
+void	ft_free_all_cmd(t_cmd **head);
 void	ft_free_node(t_cmd *head);
 //////////////////////////////////////////////////////////////////////////////
 //								px_list_utils.c								//
@@ -72,6 +72,15 @@ char	**ft_check_cmd(char *str, char **path);
 //								px_init_list.c								//
 //////////////////////////////////////////////////////////////////////////////
 t_cmd	*ft_create_node(char *str, char **path);
+t_cmd	*ft_create_chain(int argc, t_file file, char **argv, char **path);
+//////////////////////////////////////////////////////////////////////////////
+//								px_single_quote.c							//
+//////////////////////////////////////////////////////////////////////////////
+int		ft_find_quotes(char *str);
+char	*ft_rebuild_str(char **old_cmd);
+void	ft_put_flag(char **reset);
+char	**ft_build_cmd(char *reset);
+char	**ft_single_quote(char *str, char **cmd);
 //////////////////////////////////////////////////////////////////////////////
 //								px_parsing.c								//
 //////////////////////////////////////////////////////////////////////////////

@@ -6,7 +6,7 @@
 #    By: jduval <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/02 13:27:39 by jduval            #+#    #+#              #
-#    Updated: 2023/02/10 23:28:16 by jduval           ###   ########.fr        #
+#    Updated: 2023/02/13 17:49:15 by jduval           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRCS 		:=	main.c	\
 				px_parse_cmd.c	\
 				px_init_list.c	\
 				px_utils.c	\
+				px_single_quote.c	\
 
 SRCS		:= $(SRCS:%=$(SRC_DIR)/%)
 

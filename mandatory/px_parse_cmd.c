@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 15:44:32 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/11 00:12:44 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/13 15:24:29 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,15 @@
 char	*ft_rebuild_cmd(char *str, char *cmd)
 {
 	char	*s;
+	char	*new_s;
 
 	s = ft_strchr(str, ' ');
 	if (s == NULL)
 		return (cmd);
-	cmd = ft_strjoin_free(cmd, s);
-	if (cmd == NULL)
+	new_s = ft_strjoin_free(cmd, s);
+	if (new_s == NULL)
 		return (NULL);
-	return (cmd);
+	return (new_s);
 }
 
 char	*ft_only_cmd(char *str)
@@ -52,8 +53,8 @@ char	**ft_check_all_path(char *str, char *cmd, char **path)
 	int		value;
 	char	**tab;
 
-	i = 0;
-	while (path[i] != NULL)
+	i = -1;
+	while (path[++i] != NULL)
 	{
 		cmd = ft_strjoin_free_s2(path[i], cmd);
 		if (cmd == NULL)
@@ -63,12 +64,12 @@ char	**ft_check_all_path(char *str, char *cmd, char **path)
 			break ;	
 		free(cmd);
 		cmd = ft_only_cmd(str);
-		i++;
 	}
 	cmd = ft_rebuild_cmd(str, cmd);
 	if (cmd == NULL)
 		return (NULL);
 	tab = ft_split(cmd, ' ');
+	free(cmd);
 	if (tab == NULL)
 		return (NULL);
 	return (tab);
@@ -87,13 +88,15 @@ char	**ft_check_cmd(char *str, char **path)
 	if (value == 0)
 	{
 		cmd = ft_rebuild_cmd(str, cmd);
+		if (cmd == NULL)
+			return (NULL);
 		tab = ft_split(cmd, ' ');
 		free(cmd);
+		if (tab == NULL)
+			return (NULL);
 		return (tab);
 	}
 	tab = ft_check_all_path(str, cmd, path);
-	if (cmd != NULL)
-		free(cmd);
 	if (tab == NULL)
 		return (NULL);
 	return (tab);

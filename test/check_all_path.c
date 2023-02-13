@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 17:11:33 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/11 00:14:39 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/13 11:30:47 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,16 @@ static void	setup(void *data)
 static void teardown(void *data)
 {
 	(void) data;
-	if (str != NULL)
-		free (str);
+	//if (str != NULL)
+	//	free (str);
 	if (tab != NULL)
 	{
 		int i = 0;
 		while (tab[i])
-			free(tab[i++]);
+		{
+			free(tab[i]);
+			i++;
+		}
 		free(tab);	
 	}
 }

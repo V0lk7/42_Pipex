@@ -1,50 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   px_free.c                                          :+:      :+:    :+:   */
+/*   rebuild_str.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/08 15:23:49 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/13 15:33:00 by jduval           ###   ########.fr       */
+/*   Created: 2023/02/13 18:07:33 by jduval            #+#    #+#             */
+/*   Updated: 2023/02/13 18:22:59 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "greatest.h"
 #include "../include/pipex.h"
 
-void	ft_free_tab(char **tab)
-{
-	int	i;
+static char *str;
 
-	i = 0;
-	while (tab[i] != NULL)
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-}
-
-void	ft_free_all_cmd(t_cmd **head)
-{
-	t_cmd	*tmp;
-
-	while ((*head) !=  NULL)
-	{
-		tmp = (*head);
-		(*head) = (*head)->next;
-		ft_free_tab(tmp->cmd);
-		free(tmp);
-	}
-}
-
-void	ft_free_node(t_cmd *head)
-{
-	t_cmd	*tmp;
-
-	tmp = head;
-	head = head->next;
-	if (tmp->cmd != NULL)
-		ft_free_tab(tmp->cmd);
-	free(tmp);
-}
+static char **cmd = {"/usr/bin/cat", "-e"}
