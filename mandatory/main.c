@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 08:41:01 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/14 13:24:48 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/14 16:29:26 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	main(int argc, char **argv, char **envp)
 {
 	t_cmd	*cmd;
+	//int		fd[2];
 
 	cmd = ft_parsing(argc, argv, envp);
 

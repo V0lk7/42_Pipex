@@ -6,13 +6,13 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:58:12 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/13 17:50:44 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/14 16:33:52 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
 
-t_cmd	*ft_create_node(char *str, char **path)
+t_cmd	*ft_create_node(char *str, char **path, t_file file)
 {
 	t_cmd	*node;
 	char	**cmd_line;
@@ -21,7 +21,7 @@ t_cmd	*ft_create_node(char *str, char **path)
 	cmd_line = ft_single_quote(str, cmd_line);
 	if (cmd_line == NULL)
 		return (NULL);
-	node = ft_new_node(cmd_line);
+	node = ft_new_node(cmd_line, file);
 	if (node == NULL)
 		return (NULL);
 	return (node);
@@ -36,13 +36,13 @@ t_cmd	*ft_create_chain(int argc, t_file file, char **argv, char **path)
 	i = 2;
 	if (file == NO_INFILE)
 		i = 3;
-	head = ft_create_node(argv[i], path);
+	head = ft_create_node(argv[i], path, file);
 	if (head == NULL)
 		return (NULL);
 	i++;
 	while (i < argc - 1)
 	{
-		node = ft_create_node(argv[i], path);
+		node = ft_create_node(argv[i], path, file);
 		if (node == NULL)
 		{
 			ft_free_all_cmd(&head);

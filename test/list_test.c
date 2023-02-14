@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 12:07:22 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/10 14:57:21 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/14 16:36:40 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ t_cmd	*ft_init_link(void)
 	char	*tab[] = {"hello", NULL};
 	char	*tab1[] = {"there", NULL};
 	char	*tab2[] = {"general", NULL};
-	ptr = ft_new_node(tab);
-	ptr1 = ft_new_node(tab1);
-	ptr2 = ft_new_node(tab2);
+	ptr = ft_new_node(tab, INFILE);
+	ptr1 = ft_new_node(tab1, INFILE);
+	ptr2 = ft_new_node(tab2, INFILE);
 	ptr->next = ptr1;
 	ptr1->next = ptr2;
 	ptr2->next = NULL;
@@ -54,7 +54,7 @@ TEST	new_node(void)
 {
 	char	*tab[] = {"hello", NULL};
 	
-	ptr = ft_new_node(tab); 
+	ptr = ft_new_node(tab, INFILE); 
 	ASSERT_STR_EQ("hello", ptr->cmd[0]);
 	PASS();
 }
@@ -72,8 +72,8 @@ TEST	add_node_full(void)
 {
 	char	*tab[] = {"hello", NULL};
 	char	*tab2[] = {"there", NULL};
-	ptr = ft_new_node(tab);
-	ptr1 = ft_new_node(tab2);
+	ptr = ft_new_node(tab, INFILE);
+	ptr1 = ft_new_node(tab2, INFILE);
 
 	ft_add_back_node(&ptr, ptr1);
 	ASSERT_STR_EQ("there", ptr->next->cmd[0]);
@@ -83,7 +83,7 @@ TEST	add_node_full(void)
 TEST	add_node_empty(void)
 {
 	char	*tab[] = {"hello", NULL};
-	ptr1 = ft_new_node(tab);
+	ptr1 = ft_new_node(tab, INFILE);
 	t_cmd	*tmp = NULL;
 
 	ft_add_back_node(&tmp, ptr1);

@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 12:52:09 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/14 13:04:48 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/14 16:48:49 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ TEST	infile_0(void)
 	t_file	file = INFILE;
 	chain = ft_create_chain(argc, file, tab, envp);
 	ASSERT_EQ_FMT(2, count_nodes(chain), "%d");
+	ASSERT_EQ_FMT(INFILE, chain->flag, "%d");
+	ASSERT_EQ_FMT(INFILE, chain->next->flag, "%d");
 	ASSERT_STR_EQ("/usr/bin/ls", chain->cmd[0]);
 	ASSERT_STR_EQ("-la", chain->cmd[1]);
 	ASSERT_STR_EQ("/usr/bin/cat", chain->next->cmd[0]);
@@ -75,6 +77,9 @@ TEST	infile_1(void)
 	t_file	file = INFILE;
 	chain = ft_create_chain(argc, file, tab, envp);
 	ASSERT_EQ_FMT(3, count_nodes(chain), "%d");
+	ASSERT_EQ_FMT(INFILE, chain->flag, "%d");
+	ASSERT_EQ_FMT(INFILE, chain->next->flag, "%d");
+	ASSERT_EQ_FMT(INFILE, chain->next->next->flag, "%d");
 	ASSERT_STR_EQ("/usr/bin/ls", chain->cmd[0]);
 	ASSERT_STR_EQ("-la", chain->cmd[1]);
 	ASSERT_STR_EQ("/usr/bin/cat", chain->next->cmd[0]);
@@ -91,6 +96,8 @@ TEST	infile_2(void)
 	t_file	file = INFILE;
 	chain = ft_create_chain(argc, file, tab, envp);
 	ASSERT_EQ_FMT(2, count_nodes(chain), "%d");
+	ASSERT_EQ_FMT(INFILE, chain->flag, "%d");
+	ASSERT_EQ_FMT(INFILE, chain->next->flag, "%d");
 	ASSERT_STR_EQ("/usr/bin/grep", chain->cmd[0]);
 	ASSERT_STR_EQ("'je", chain->cmd[1]);
 	ASSERT_STR_EQ("suis", chain->cmd[2]);
@@ -106,6 +113,7 @@ TEST	outfile_0(void)
 	t_file	file = NO_INFILE;
 	chain = ft_create_chain(argc, file, tab, envp);
 	ASSERT_EQ_FMT(1, count_nodes(chain), "%d");
+	ASSERT_EQ_FMT(NO_INFILE, chain->flag, "%d");
 	ASSERT_STR_EQ("/usr/bin/cat", chain->cmd[0]);
 	ASSERT_STR_EQ("-e", chain->cmd[1]);
 	PASS();
@@ -118,6 +126,8 @@ TEST	outfile_1(void)
 	t_file	file = NO_INFILE;
 	chain = ft_create_chain(argc, file, tab, envp);
 	ASSERT_EQ_FMT(2, count_nodes(chain), "%d");
+	ASSERT_EQ_FMT(NO_INFILE, chain->flag, "%d");
+	ASSERT_EQ_FMT(NO_INFILE, chain->next->flag, "%d");
 	ASSERT_STR_EQ("/usr/bin/cat", chain->cmd[0]);
 	ASSERT_STR_EQ("-e", chain->cmd[1]);
 	ASSERT_STR_EQ("/usr/bin/grep", chain->next->cmd[0]);
@@ -132,6 +142,7 @@ TEST	outfile_2(void)
 	t_file	file = NO_INFILE;
 	chain = ft_create_chain(argc, file, tab, envp);
 	ASSERT_EQ_FMT(1, count_nodes(chain), "%d");
+	ASSERT_EQ_FMT(NO_INFILE, chain->flag, "%d");
 	ASSERT_STR_EQ("/usr/bin/cat", chain->cmd[0]);
 	ASSERT_STR_EQ("-e", chain->cmd[1]);
 	PASS();
