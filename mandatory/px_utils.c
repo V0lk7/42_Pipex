@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 23:25:20 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/10 23:29:11 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/14 13:08:28 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,20 @@ char	*ft_strjoin_free_s2(char *s1, char *s2)
 	ft_strlcpy(&new_s[size_alloc], s2, size_srcs);
 	free (s2);
 	return (new_s);
+}
+
+int	ft_find_quotes(char *str)
+{
+	int	i;
+	int	quote;
+
+	i = 0;
+	quote = 0;
+	while (str[i])
+	{
+		if (str[i] == 39)
+			quote++;
+		i++;
+	}
+	return (quote);
 }

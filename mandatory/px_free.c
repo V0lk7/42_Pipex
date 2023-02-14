@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:23:49 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/13 15:33:00 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/14 13:07:02 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_free_all_cmd(t_cmd **head)
 {
 	t_cmd	*tmp;
 
-	while ((*head) !=  NULL)
+	while ((*head) != NULL)
 	{
 		tmp = (*head);
 		(*head) = (*head)->next;

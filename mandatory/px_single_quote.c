@@ -6,26 +6,27 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:51:34 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/13 17:58:19 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/14 13:08:36 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
 
-int	ft_find_quotes(char *str)
+char	*ft_put_space(char *str)
 {
-	int	i;
-	int	quote;
+	int		len;
+	int		i;
+	char	*new;
 
+	len = ft_strlen(str);
 	i = 0;
-	quote = 0;
-	while (str[i])
-	{
-		if (str[i] == 39)
-		 quote++;
-		i++;
-	}
-	return (quote);
+	new = ft_calloc(sizeof(char), len + 2);
+	if (new == NULL)
+		return (NULL);
+	ft_strlcpy(new, str, len + 1);
+	new[len] = ' ';
+	free(str);
+	return (new);
 }
 
 char	*ft_rebuild_str(char **old_cmd)
@@ -34,8 +35,10 @@ char	*ft_rebuild_str(char **old_cmd)
 	int		i;
 
 	i = 0;
+	reset = NULL;
 	while (old_cmd[i])
 	{
+		old_cmd[i] = ft_put_space(old_cmd[i]);
 		reset = ft_strjoin_free(reset, old_cmd[i]);
 		if (reset == NULL)
 			return (NULL);
@@ -57,7 +60,7 @@ void	ft_put_flag(char **reset)
 			while ((*reset)[i] && (*reset)[i] != 39)
 			{
 				if ((*reset)[i] == ' ')
-					(*reset)[i] = 127;
+					(*reset)[i] = -128;
 				i++;
 			}
 		}
@@ -95,7 +98,7 @@ char	**ft_single_quote(char *str, char **cmd)
 	char	**new_cmd;
 	char	*reset;
 	int		quote;
-	
+
 	quote = ft_find_quotes(str);
 	if (quote == 0 || quote % 2 != 0)
 		return (cmd);

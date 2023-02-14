@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 12:15:13 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/13 17:56:26 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/14 13:09:20 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 typedef struct s_cmd
 {
-	char 			**cmd;
+	char			**cmd;
 	struct s_cmd	*next;
 }	t_cmd;
 
@@ -77,6 +77,7 @@ t_cmd	*ft_create_chain(int argc, t_file file, char **argv, char **path);
 //								px_single_quote.c							//
 //////////////////////////////////////////////////////////////////////////////
 int		ft_find_quotes(char *str);
+char	*ft_put_space(char *str);
 char	*ft_rebuild_str(char **old_cmd);
 void	ft_put_flag(char **reset);
 char	**ft_build_cmd(char *reset);

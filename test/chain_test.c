@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 12:52:09 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/13 15:41:31 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/14 13:04:48 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static int	count_nodes(t_cmd *head)
 	return (i);
 }
 
-TEST	infile_ok_2_nodes(void)
+TEST	infile_0(void)
 {
 	char	*tab[] = {"./pipex", "infile", "ls -la", "cat -e", "outfile", NULL};
 	int		argc = 5;
@@ -68,7 +68,7 @@ TEST	infile_ok_2_nodes(void)
 	PASS();
 }	
 
-TEST	infile_ok_3_nodes(void)
+TEST	infile_1(void)
 {
 	char	*tab[] = {"./pipex", "infile", "ls -la", "cat -e", "grep 'hello world'", "outfile", NULL};
 	int		argc = 6;
@@ -84,10 +84,67 @@ TEST	infile_ok_3_nodes(void)
 	PASS();
 }
 
+TEST	infile_2(void)
+{
+	char	*tab[] = {"./pipex", "infile", "grep 'je suis", "cat -e", "outfile", NULL};
+	int		argc = 5;
+	t_file	file = INFILE;
+	chain = ft_create_chain(argc, file, tab, envp);
+	ASSERT_EQ_FMT(2, count_nodes(chain), "%d");
+	ASSERT_STR_EQ("/usr/bin/grep", chain->cmd[0]);
+	ASSERT_STR_EQ("'je", chain->cmd[1]);
+	ASSERT_STR_EQ("suis", chain->cmd[2]);
+	ASSERT_STR_EQ("/usr/bin/cat", chain->next->cmd[0]);
+	ASSERT_STR_EQ("-e", chain->next->cmd[1]);
+	PASS();
+}
+
+TEST	outfile_0(void)
+{
+	char	*tab[] = {"./pipex", "infile", "ls -la", "cat -e", "outfile", NULL};
+	int		argc = 5;
+	t_file	file = NO_INFILE;
+	chain = ft_create_chain(argc, file, tab, envp);
+	ASSERT_EQ_FMT(1, count_nodes(chain), "%d");
+	ASSERT_STR_EQ("/usr/bin/cat", chain->cmd[0]);
+	ASSERT_STR_EQ("-e", chain->cmd[1]);
+	PASS();
+}	
+
+TEST	outfile_1(void)
+{
+	char	*tab[] = {"./pipex", "infile", "ls -la", "cat -e", "grep 'hello world'", "outfile", NULL};
+	int		argc = 6;
+	t_file	file = NO_INFILE;
+	chain = ft_create_chain(argc, file, tab, envp);
+	ASSERT_EQ_FMT(2, count_nodes(chain), "%d");
+	ASSERT_STR_EQ("/usr/bin/cat", chain->cmd[0]);
+	ASSERT_STR_EQ("-e", chain->cmd[1]);
+	ASSERT_STR_EQ("/usr/bin/grep", chain->next->cmd[0]);
+	ASSERT_STR_EQ("'hello world'", chain->next->cmd[1]);
+	PASS();
+}
+
+TEST	outfile_2(void)
+{
+	char	*tab[] = {"./pipex", "infile", "grep 'je suis", "cat -e", "outfile", NULL};
+	int		argc = 5;
+	t_file	file = NO_INFILE;
+	chain = ft_create_chain(argc, file, tab, envp);
+	ASSERT_EQ_FMT(1, count_nodes(chain), "%d");
+	ASSERT_STR_EQ("/usr/bin/cat", chain->cmd[0]);
+	ASSERT_STR_EQ("-e", chain->cmd[1]);
+	PASS();
+}
+
 SUITE (chain_test)
 {
 	SET_SETUP(setup, NULL);
 	SET_TEARDOWN(teardown, NULL);
-	RUN_TEST(infile_ok_2_nodes);
-	RUN_TEST(infile_ok_3_nodes);
+	RUN_TEST(infile_0);
+	RUN_TEST(infile_1);
+	RUN_TEST(infile_2);
+	RUN_TEST(outfile_0);
+	RUN_TEST(outfile_1);
+	RUN_TEST(outfile_2);
 }

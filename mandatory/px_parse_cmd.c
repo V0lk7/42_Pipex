@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 15:44:32 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/13 15:24:29 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/14 13:06:35 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	**ft_check_all_path(char *str, char *cmd, char **path)
 			return (NULL);
 		value = access(cmd, F_OK);
 		if (value == 0)
-			break ;	
+			break ;
 		free(cmd);
 		cmd = ft_only_cmd(str);
 	}

@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 10:04:43 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/11 00:00:23 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/14 13:07:22 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	**ft_envp_to_path(char **envp)
 	char	**path;
 	char	*str;
 	int		index;
-	
+
 	index = ft_find_path(envp);
 	if (index == -1)
 	{
