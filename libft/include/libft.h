@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 14:21:46 by jduval            #+#    #+#             */
-/*   Updated: 2023/01/17 14:18:49 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/15 17:08:58 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <stdarg.h>
 # include <fcntl.h>
+# include <sys/wait.h>
 
 // BUFFER FOR GNL
 # ifndef BUFFER_SIZE

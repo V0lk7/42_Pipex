@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:58:12 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/14 16:33:52 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/15 17:19:13 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,12 @@ t_cmd	*ft_create_chain(int argc, t_file file, char **argv, char **path)
 		if (node == NULL)
 		{
 			ft_free_all_cmd(&head);
+			ft_free_tab(path);
 			return (NULL);
 		}
 		ft_add_back_node(&head, node);
 		i++;
 	}
+	ft_free_tab(path);
 	return (head);
 }

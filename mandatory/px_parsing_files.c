@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 16:58:35 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/09 16:21:29 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/15 17:33:16 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_file	ft_infile(char **argv)
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 	{
-		perror(NULL);
+		perror("infile: ");
 		return (NO_INFILE);
 	}
 	flag = close(fd);
@@ -38,7 +38,7 @@ t_bool	ft_outfile(int argc, char **argv)
 	int	fd;
 	int	flag;
 
-	fd = open(argv[argc - 1], O_CREAT | O_TRUNC, S_IRWXU);
+	fd = open(argv[argc - 1], O_CREAT | O_TRUNC, 777);
 	flag = 0;
 	if (fd == -1)
 		perror(NULL);

@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 12:15:13 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/14 16:33:14 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/15 17:11:55 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,14 @@ char	**ft_envp_to_path(char **envp);
 //////////////////////////////////////////////////////////////////////////////
 void	ft_free_tab(char **tab);
 void	ft_free_all_cmd(t_cmd **head);
-void	ft_free_node(t_cmd *head);
+t_cmd	*ft_free_node(t_cmd **head);
 //////////////////////////////////////////////////////////////////////////////
 //								px_list_utils.c								//
 //////////////////////////////////////////////////////////////////////////////
 t_cmd	*ft_new_node(char **tab, t_file file);
 void	ft_add_back_node(t_cmd **head, t_cmd *new);
 t_cmd	*ft_last_node(t_cmd *head);
+int		ft_count_cmds(t_cmd *head);
 //////////////////////////////////////////////////////////////////////////////
 //								px_parse_cmd.c								//
 //////////////////////////////////////////////////////////////////////////////
@@ -87,4 +88,5 @@ char	**ft_single_quote(char *str, char **cmd);
 //////////////////////////////////////////////////////////////////////////////
 char	*ft_strjoin_free_s2(char *s1, char *s2);
 int		ft_find_quotes(char *str);
+void	ft_error_function(void);
 #endif
