@@ -6,7 +6,7 @@
 #    By: jduval <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/09 10:53:32 by jduval            #+#    #+#              #
-#    Updated: 2023/02/14 11:31:13 by jduval           ###   ########.fr        #
+#    Updated: 2023/02/16 16:11:44 by jduval           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,5 +48,8 @@ v:
 gdb:
 	cd test/ && gdb -args ./test
 .PHONY: gdb
+
+flemme:
+	echo valgrind --track-fds=yes --leak-check=full --trace-children=yes
 
 .PHONY: test

@@ -3,3 +3,5 @@ pipex
 libft/libft.a
 .build_pipex
 mandatory/a.out
+infile
+outfile

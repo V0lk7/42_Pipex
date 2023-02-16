@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 12:15:13 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/15 17:11:55 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/16 18:27:11 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,7 @@ t_cmd	*ft_parsing(int argc, char **argv, char **envp);
 //								px_parsing_files							//
 //////////////////////////////////////////////////////////////////////////////
 t_file	ft_infile(char **argv);
-t_bool	ft_outfile(int argc, char **argv);
-t_file	ft_files(int argc, char **argv);
+t_file	ft_files(char **argv);
 //////////////////////////////////////////////////////////////////////////////
 //								px_parsing_path								//
 //////////////////////////////////////////////////////////////////////////////
@@ -84,9 +83,14 @@ void	ft_put_flag(char **reset);
 char	**ft_build_cmd(char *reset);
 char	**ft_single_quote(char *str, char **cmd);
 //////////////////////////////////////////////////////////////////////////////
-//								px_utils.c								//
+//								px_utils.c									//
 //////////////////////////////////////////////////////////////////////////////
 char	*ft_strjoin_free_s2(char *s1, char *s2);
 int		ft_find_quotes(char *str);
 void	ft_error_function(void);
+//////////////////////////////////////////////////////////////////////////////
+//								px_exec_cmds.c								//
+//////////////////////////////////////////////////////////////////////////////
+void	ft_child(t_cmd *cmd, char *argv, int *pipefd, char **envp);
+void	ft_two_cmds(t_cmd *cmd, int argc, char **argv, char **envp);
 #endif

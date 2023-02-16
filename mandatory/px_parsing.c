@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 13:54:48 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/14 13:24:08 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/16 16:03:41 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_cmd	*ft_parsing(int argc, char **argv, char **envp)
 		ft_printf("ERROR\nPathern: ./pipex 'file1' 'cmd1' 'cmd2' 'file2'\n");
 		exit (0);
 	}
-	file = ft_files(argc, argv);
+	file = ft_files(argv);
 	if (file == ERROR)
 		exit(0);
 	path = ft_envp_to_path(envp);

@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:02:12 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/10 14:10:56 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/16 16:02:40 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,24 +23,7 @@ TEST	infile(void)
 	PASS();	
 }
 
-TEST	outfile(void)
-{
-	char	*test[] = {"lambda", "outfile.txt", NULL};
-	char	*test1[] = {"lambda", "well.txt", NULL};
-	int		fd = 0;
-
-	ASSERT_EQ(TRUE, ft_outfile(2, test));
-	ASSERT_EQ(TRUE, ft_outfile(2, test1));
-	fd = open("well.txt", O_RDONLY);
-	if (fd == -1)
-		ASSERT_EQ(-1, 0);
-	ASSERT_EQ(1, 1);
-	remove("well.txt");
-	PASS();
-}
-
 SUITE (file_test)
 {
 	RUN_TEST(infile);
-	RUN_TEST(outfile);
 }
