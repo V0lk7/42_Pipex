@@ -6,7 +6,7 @@
 #    By: jduval <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/09 10:53:32 by jduval            #+#    #+#              #
-#    Updated: 2023/02/16 16:11:44 by jduval           ###   ########.fr        #
+#    Updated: 2023/02/20 13:39:13 by jduval           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,6 @@ gdb:
 .PHONY: gdb
 
 flemme:
-	echo valgrind --track-fds=yes --leak-check=full --trace-children=yes
+	echo valgrind --track-fds=yes --leak-check=full --show-leak-kinds=all --trace-children=yes
 
 .PHONY: test

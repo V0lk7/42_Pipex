@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 08:41:01 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/16 18:33:57 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/20 13:30:57 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	ft_one_cmd(t_cmd *cmd, char *outfile, char **envp)
 		if (execve(cmd->cmd[0], cmd->cmd, envp) == -1)
 			ft_error_function();
 	}
-	if (pid > 0 && waitpid(-1, NULL, 0) == -1)
+	if (pid > 0 && waitpid(-1, NULL, 0 == -1))
 		perror("waitpid ");
 	ft_free_node(&cmd);
 }

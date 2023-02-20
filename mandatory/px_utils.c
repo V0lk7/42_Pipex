@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 23:25:20 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/16 15:56:02 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/20 13:05:00 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,3 +61,9 @@ void	ft_error_function(void)
 	exit(0);
 }
 
+void	ft_error_pipe(t_cmd *cmd)
+{
+	perror("pipe ");
+	ft_free_all_cmd(&cmd);
+	exit (0);
+}

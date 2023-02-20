@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 12:15:13 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/16 18:27:11 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/20 13:06:39 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ char	**ft_single_quote(char *str, char **cmd);
 char	*ft_strjoin_free_s2(char *s1, char *s2);
 int		ft_find_quotes(char *str);
 void	ft_error_function(void);
+void	ft_error_pipe(t_cmd *cmd);
 //////////////////////////////////////////////////////////////////////////////
 //								px_exec_cmds.c								//
 //////////////////////////////////////////////////////////////////////////////
