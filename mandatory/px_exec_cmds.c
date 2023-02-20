@@ -6,68 +6,47 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:13:57 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/20 13:35:45 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/20 17:00:11 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
-
-static void	ft_close_pipe(int fd1, int fd2)
+void	ft_cmd_not_found(t_cmd *cmd)
 {
-	if (close(fd1) == -1)
-		perror("close ");
-	if (close(fd2) == -1)
-		perror("close ");
+	ft_printf("command not found: %s\n", cmd->cmd[0]);
+	ft_free_all_cmd(&cmd);
+	exit(0);
 }
 
-static void	ft_close_files(int fd1, int fd2, int fd3)
+void	ft_close_fds(int fd1, int fd2, int fd3)
 {
-	int	flag;
-
-	flag = 0;
-	if (fd1 > 2 && fd2 > 2 && fd3 > 2)
-	{
-		flag = close(fd1);
-		if (flag == -1)
-			ft_error_function();
-		flag = close(fd2);
-		if (flag == -1)
-			ft_error_function();
-		flag = close(fd3);
-		if (flag == -1)
-			ft_error_function();
-	}
-	else
-		return ;
+	if (fd1 > -1)
+		close(fd1);
+	if (fd2 > -1)
+		close(fd2);
+	if (fd3 > -1)
+		close(fd3);
 }
 
 void	ft_child(t_cmd *cmd, char *argv, int *pipefd, char **envp)
 {
-	int	fd;
-
 	if (cmd->next == NULL)
 	{
-		fd = open(argv, O_CREAT | O_TRUNC | O_RDWR, 0777);
-		if (fd == -1)
-			ft_error_function();
-		if (dup2(pipefd[0], STDIN_FILENO) == -1)
-			ft_error_function();
-		if (dup2(fd, STDOUT_FILENO) == -1)
-			ft_error_function();
-		ft_close_files(fd, pipefd[0], pipefd[1]);
-		if (execve(cmd->cmd[0], cmd->cmd, envp) == -1)
-			ft_error_function();
+		ft_dup_last_cmd(pipefd, argv, cmd);
+		if (cmd->flag == 0)
+		{
+			if (execve(cmd->cmd[0], cmd->cmd, envp) == -1)
+				ft_error_function(cmd);
+		}
+		ft_cmd_not_found(cmd);
 	}
-	fd = open(argv, O_RDWR);
-	if (fd == -1)
-		ft_error_function();
-	if (dup2(fd, STDIN_FILENO) == -1)
-		ft_error_function();
-	if (dup2(pipefd[1], STDOUT_FILENO) == -1)
-		ft_error_function();
-	ft_close_files(fd, pipefd[0], pipefd[1]);
-	if (execve(cmd->cmd[0], cmd->cmd, envp) == -1)
-		ft_error_function();
+	ft_dup_first_cmd(pipefd, argv, cmd);
+	if (cmd->flag == 0)
+	{
+		if (execve(cmd->cmd[0], cmd->cmd, envp) == -1)
+			ft_error_function(cmd);
+	}
+	ft_cmd_not_found(cmd);
 }
 
 void	ft_two_cmds(t_cmd *cmd, int argc, char **argv, char **envp)
@@ -78,7 +57,7 @@ void	ft_two_cmds(t_cmd *cmd, int argc, char **argv, char **envp)
 	pid_t	pid;
 
 	if (pipe(pipefd) == -1)
-		ft_error_pipe(cmd);
+		ft_error_function(cmd);
 	temp_cmd = cmd;
 	n_cmd = 0;
 	while (n_cmd <= 1)
@@ -95,6 +74,6 @@ void	ft_two_cmds(t_cmd *cmd, int argc, char **argv, char **envp)
 		temp_cmd = temp_cmd->next;
 	}
 	if (pid > 0 && waitpid(-1, NULL, 0) == -1)
-		perror("waitpid ");
-	ft_close_pipe(pipefd[0], pipefd[1]);
+		perror(NULL);
+	ft_close_fds(pipefd[0], pipefd[1], -1);
 }

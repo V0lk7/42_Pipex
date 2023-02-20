@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 12:15:13 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/20 13:06:39 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/20 17:00:44 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,10 @@
 # include <fcntl.h>
 # include <stdio.h>
 
-typedef enum e_file
-{
-	ERROR,
-	NO_INFILE,
-	INFILE
-}	t_file;
-
 typedef struct s_cmd
 {
 	char			**cmd;
-	t_file			flag;
+	int				flag;
 	struct s_cmd	*next;
 }	t_cmd;
 
@@ -37,11 +30,6 @@ typedef struct s_cmd
 //								px_parsing.c								//
 //////////////////////////////////////////////////////////////////////////////
 t_cmd	*ft_parsing(int argc, char **argv, char **envp);
-//////////////////////////////////////////////////////////////////////////////
-//								px_parsing_files							//
-//////////////////////////////////////////////////////////////////////////////
-t_file	ft_infile(char **argv);
-t_file	ft_files(char **argv);
 //////////////////////////////////////////////////////////////////////////////
 //								px_parsing_path								//
 //////////////////////////////////////////////////////////////////////////////
@@ -58,7 +46,7 @@ t_cmd	*ft_free_node(t_cmd **head);
 //////////////////////////////////////////////////////////////////////////////
 //								px_list_utils.c								//
 //////////////////////////////////////////////////////////////////////////////
-t_cmd	*ft_new_node(char **tab, t_file file);
+t_cmd	*ft_new_node(char **tab, int flag);
 void	ft_add_back_node(t_cmd **head, t_cmd *new);
 t_cmd	*ft_last_node(t_cmd *head);
 int		ft_count_cmds(t_cmd *head);
@@ -72,8 +60,8 @@ char	**ft_check_cmd(char *str, char **path);
 //////////////////////////////////////////////////////////////////////////////
 //								px_init_list.c								//
 //////////////////////////////////////////////////////////////////////////////
-t_cmd	*ft_create_node(char *str, char **path, t_file file);
-t_cmd	*ft_create_chain(int argc, t_file file, char **argv, char **path);
+t_cmd	*ft_create_node(char *str, char **path);
+t_cmd	*ft_create_chain(int argc, char **argv, char **path);
 //////////////////////////////////////////////////////////////////////////////
 //								px_single_quote.c							//
 //////////////////////////////////////////////////////////////////////////////
@@ -87,11 +75,17 @@ char	**ft_single_quote(char *str, char **cmd);
 //////////////////////////////////////////////////////////////////////////////
 char	*ft_strjoin_free_s2(char *s1, char *s2);
 int		ft_find_quotes(char *str);
-void	ft_error_function(void);
-void	ft_error_pipe(t_cmd *cmd);
+void	ft_error_function(t_cmd *cmd);
 //////////////////////////////////////////////////////////////////////////////
 //								px_exec_cmds.c								//
 //////////////////////////////////////////////////////////////////////////////
+void	ft_close_fds(int fd1, int fd2, int fd3);
 void	ft_child(t_cmd *cmd, char *argv, int *pipefd, char **envp);
 void	ft_two_cmds(t_cmd *cmd, int argc, char **argv, char **envp);
+void	ft_cmd_not_found(t_cmd *cmd);
+//////////////////////////////////////////////////////////////////////////////
+//								px_change_fd.c								//
+//////////////////////////////////////////////////////////////////////////////
+void	ft_dup_last_cmd(int *pipefd, char *argv, t_cmd *cmd);
+void	ft_dup_first_cmd(int *pipefd, char *argv, t_cmd *cmd);
 #endif

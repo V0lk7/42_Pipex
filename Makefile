@@ -6,7 +6,7 @@
 #    By: jduval <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/02 13:27:39 by jduval            #+#    #+#              #
-#    Updated: 2023/02/16 18:16:08 by jduval           ###   ########.fr        #
+#    Updated: 2023/02/20 15:41:05 by jduval           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,6 @@ SRC_DIR		=	mandatory
 
 SRCS 		:=	main.c	\
 				px_free.c	px_list_utils.c	\
-				px_parsing_files.c	\
 				px_parsing_path.c	\
 				px_parse_cmd.c	\
 				px_init_list.c	\
@@ -38,6 +37,7 @@ SRCS 		:=	main.c	\
 				px_single_quote.c	\
 				px_parsing.c	\
 				px_exec_cmds.c	\
+				px_change_fd.c	\
 
 SRCS		:= $(SRCS:%=$(SRC_DIR)/%)
 

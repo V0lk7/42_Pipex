@@ -6,13 +6,13 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:37:20 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/15 12:53:01 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/20 16:51:16 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
 
-t_cmd	*ft_new_node(char **tab, t_file file)
+t_cmd	*ft_new_node(char **tab, int flag)
 {
 	t_cmd	*new;
 
@@ -20,7 +20,7 @@ t_cmd	*ft_new_node(char **tab, t_file file)
 	if (new == NULL)
 		return (NULL);
 	new->cmd = tab;
-	new->flag = file;
+	new->flag = flag;
 	new->next = NULL;
 	return (new);
 }

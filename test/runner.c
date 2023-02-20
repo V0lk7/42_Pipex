@@ -6,14 +6,13 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 08:34:48 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/14 11:33:29 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/20 15:41:46 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "greatest.h"
 
 SUITE(list_suit);
-SUITE(file_test);
 SUITE(path_test);
 SUITE(only_cmd);
 SUITE(rebuild_cmd);
@@ -32,7 +31,6 @@ int	main(int argc, char **argv)
 
 	/* Tests can also be gathered into test suites. */
 	RUN_SUITE(list_suit);
-	RUN_SUITE(file_test);
 	RUN_SUITE(path_test);
 	RUN_SUITE(only_cmd);
 	RUN_SUITE(rebuild_cmd);
