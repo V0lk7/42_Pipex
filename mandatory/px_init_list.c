@@ -6,11 +6,24 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:58:12 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/20 16:50:03 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/21 09:10:06 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
+
+static void	ft_free_array(char **array)
+{
+	int	i;
+
+	i = 0;
+	while (array[i])
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
+}
 
 t_cmd	*ft_create_node(char *str, char **path)
 {
@@ -22,10 +35,13 @@ t_cmd	*ft_create_node(char *str, char **path)
 	cmd_line = ft_single_quote(str, cmd_line);
 	if (cmd_line == NULL)
 		return (NULL);
-	flag = access(str, F_OK);
+	flag = access(cmd_line[0], F_OK);
 	node = ft_new_node(cmd_line, flag);
 	if (node == NULL)
+	{
+		ft_free_array(cmd_line);
 		return (NULL);
+	}
 	return (node);
 }
 
