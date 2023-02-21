@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:58:12 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/21 09:10:06 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/21 17:13:40 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_cmd	*ft_create_node(char *str, char **path)
 	char	**cmd_line;
 	int		flag;
 
-	cmd_line = ft_check_cmd(str, path);
+	cmd_line = ft_command(str, path);
 	cmd_line = ft_single_quote(str, cmd_line);
 	if (cmd_line == NULL)
 		return (NULL);

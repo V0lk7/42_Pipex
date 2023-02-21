@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 10:36:30 by jduval            #+#    #+#             */
-/*   Updated: 2022/11/29 16:03:20 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/21 15:39:59 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ char	**ft_split(char *s, char c)
 	int		error;
 
 	i = 0;
-	if (!s)
+	if (!s || s[0] == '\0')
 		return (NULL);
 	len_y = ft_len_y(s, c);
 	srcs_tab = malloc((len_y + 1) * sizeof(char *));

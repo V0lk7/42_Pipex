@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 12:15:13 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/20 17:00:44 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/21 17:11:16 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ char	*ft_rebuild_cmd(char *str, char *cmd);
 char	*ft_only_cmd(char *str);
 char	**ft_check_all_path(char *str, char *cmd, char **path);
 char	**ft_check_cmd(char *str, char **path);
+char	**ft_command(char *str, char **path);
 //////////////////////////////////////////////////////////////////////////////
 //								px_init_list.c								//
 //////////////////////////////////////////////////////////////////////////////

@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 15:44:32 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/14 13:06:35 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/21 17:10:44 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,4 +100,27 @@ char	**ft_check_cmd(char *str, char **path)
 	if (tab == NULL)
 		return (NULL);
 	return (tab);
+}
+
+char	**ft_command(char *str, char **path)
+{
+	char	**array;
+
+	if (str[0] == '\0')
+	{
+		array = malloc(sizeof(char *) * 2);
+		if (array == NULL)
+			return (NULL);
+		array[0] = ft_strdup(str);
+		if (array[0] == NULL)
+		{
+			free(array);
+			return (NULL);
+		}
+		array[1] = NULL;
+		return (array);
+	}
+	else
+		array = ft_check_cmd(str, path);
+	return (array);
 }

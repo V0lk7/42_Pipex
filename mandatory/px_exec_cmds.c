@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:13:57 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/21 09:05:29 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/21 17:16:28 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_cmd_not_found(t_cmd *cmd)
 	tmp = cmd;
 	while(tmp != NULL)
 	{
-		if (tmp->flag == -1)
+		if (tmp->flag == -1 && tmp->cmd[0][0] != '\0')
 			ft_printf("command not found: %s\n", tmp->cmd[0]);
 		tmp = tmp->next;
 	}
@@ -71,10 +71,7 @@ void	ft_two_cmds(t_cmd *cmd, int argc, char **argv, char **envp)
 	pid_t	pid;
 
 	if (pipe(pipefd) == -1)
-	{
-		printf("error pipe\n");
 		ft_error_function(cmd);
-	}
 	temp_cmd = cmd;
 	n_cmd = 0;
 	while (n_cmd <= 1)
@@ -87,13 +84,9 @@ void	ft_two_cmds(t_cmd *cmd, int argc, char **argv, char **envp)
 			else
 				ft_child(temp_cmd, argv[argc - 1], pipefd, envp);
 		}
-		n_cmd++;
 		temp_cmd = temp_cmd->next;
-	}
-	if (pid > 0 && waitpid(-1, NULL, 0) == -1)
-	{
-		printf("error waitpid\n");
-		perror(NULL);
+		n_cmd++;
 	}
 	ft_close_fds(pipefd[0], pipefd[1], -1);
+	waitpid(pid, NULL, 0);
 }
