@@ -5,3 +5,7 @@ libft/libft.a
 mandatory/a.out
 infile
 outfile
+bonus/all_function.c
+bonus/main.c
+bonus/libft.h
+bonus/a.out
