@@ -6,37 +6,24 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:58:12 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/21 17:13:40 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/22 11:47:55 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
 
-static void	ft_free_array(char **array)
-{
-	int	i;
-
-	i = 0;
-	while (array[i])
-	{
-		free(array[i]);
-		i++;
-	}
-	free(array);
-}
-
-t_cmd	*ft_create_node(char *str, char **path)
+t_cmd	*ft_create_node(char *str, char **path, int position)
 {
 	t_cmd	*node;
 	char	**cmd_line;
 	int		flag;
 
-	cmd_line = ft_command(str, path);
+	cmd_line = ft_make_cmd(str, path);
 	cmd_line = ft_single_quote(str, cmd_line);
 	if (cmd_line == NULL)
 		return (NULL);
 	flag = access(cmd_line[0], F_OK);
-	node = ft_new_node(cmd_line, flag);
+	node = ft_new_node(cmd_line, flag, position);
 	if (node == NULL)
 	{
 		ft_free_array(cmd_line);
@@ -52,22 +39,22 @@ t_cmd	*ft_create_chain(int argc, char **argv, char **path)
 	t_cmd	*node;
 
 	i = 2;
-	head = ft_create_node(argv[i], path);
+	head = ft_create_node(argv[i], path, i - 1);
 	if (head == NULL)
 		return (NULL);
 	i++;
 	while (i < argc - 1)
 	{
-		node = ft_create_node(argv[i], path);
+		node = ft_create_node(argv[i], path, i - 1);
 		if (node == NULL)
 		{
-			ft_free_all_cmd(&head);
-			ft_free_tab(path);
+			ft_free_lstcmd(&head);
+			ft_free_array(path);
 			return (NULL);
 		}
 		ft_add_back_node(&head, node);
 		i++;
 	}
-	ft_free_tab(path);
+	ft_free_array(path);
 	return (head);
 }

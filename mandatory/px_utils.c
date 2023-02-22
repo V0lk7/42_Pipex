@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 23:25:20 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/21 09:39:26 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/22 11:50:29 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,4 @@ int	ft_find_quotes(char *str)
 		i++;
 	}
 	return (quote);
-}
-
-void	ft_error_function(t_cmd *cmd)
-{
-	ft_free_all_cmd(&cmd);
-	perror(NULL);
-	exit(0);
 }

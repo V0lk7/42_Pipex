@@ -6,26 +6,26 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:23:49 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/21 15:41:13 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/22 08:29:18 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
 
-void	ft_free_tab(char **tab)
+void	ft_free_array(char **array)
 {
 	int	i;
 
 	i = 0;
-	while (tab[i] != NULL)
+	while (array[i] != NULL)
 	{
-		free(tab[i]);
+		free(array[i]);
 		i++;
 	}
-	free(tab);
+	free(array);
 }
 
-void	ft_free_all_cmd(t_cmd **head)
+void	ft_free_lstcmd(t_cmd **head)
 {
 	t_cmd	*tmp;
 
@@ -33,19 +33,19 @@ void	ft_free_all_cmd(t_cmd **head)
 	{
 		tmp = (*head);
 		(*head) = (*head)->next;
-		ft_free_tab(tmp->cmd);
+		ft_free_array(tmp->cmd);
 		free(tmp);
 	}
 }
 
-t_cmd	*ft_free_node(t_cmd **head)
+t_cmd	*ft_free_cmd(t_cmd **head)
 {
 	t_cmd	*tmp;
 
 	tmp = (*head);
 	(*head) = (*head)->next;
 	if (tmp->cmd != NULL)
-		ft_free_tab(tmp->cmd);
+		ft_free_array(tmp->cmd);
 	free(tmp);
 	return ((*head));
 }

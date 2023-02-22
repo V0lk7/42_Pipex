@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:51:34 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/14 13:08:36 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/22 11:45:29 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ char	**ft_single_quote(char *str, char **cmd)
 	if (quote == 0 || quote % 2 != 0)
 		return (cmd);
 	reset = ft_rebuild_str(cmd);
-	ft_free_tab(cmd);
+	ft_free_array(cmd);
 	if (reset == NULL)
 		return (NULL);
 	new_cmd = ft_build_cmd(reset);

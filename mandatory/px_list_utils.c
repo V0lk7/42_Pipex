@@ -6,21 +6,22 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:37:20 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/20 16:51:16 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/22 09:41:17 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
 
-t_cmd	*ft_new_node(char **tab, int flag)
+t_cmd	*ft_new_node(char **array, int valid, int position)
 {
 	t_cmd	*new;
 
 	new = malloc(sizeof(t_cmd));
 	if (new == NULL)
 		return (NULL);
-	new->cmd = tab;
-	new->flag = flag;
+	new->cmd = array;
+	new->valid = valid;
+	new->position = position;
 	new->next = NULL;
 	return (new);
 }

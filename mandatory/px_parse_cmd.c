@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 15:44:32 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/21 17:10:44 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/22 11:47:43 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	**ft_check_all_path(char *str, char *cmd, char **path)
 {
 	int		i;
 	int		value;
-	char	**tab;
+	char	**array;
 
 	i = -1;
 	while (path[++i] != NULL)
@@ -68,18 +68,18 @@ char	**ft_check_all_path(char *str, char *cmd, char **path)
 	cmd = ft_rebuild_cmd(str, cmd);
 	if (cmd == NULL)
 		return (NULL);
-	tab = ft_split(cmd, ' ');
+	array = ft_split(cmd, ' ');
 	free(cmd);
-	if (tab == NULL)
+	if (array == NULL)
 		return (NULL);
-	return (tab);
+	return (array);
 }
 
 char	**ft_check_cmd(char *str, char **path)
 {
 	int		value;
 	char	*cmd;
-	char	**tab;
+	char	**array;
 
 	cmd = ft_only_cmd(str);
 	if (cmd == NULL)
@@ -90,19 +90,19 @@ char	**ft_check_cmd(char *str, char **path)
 		cmd = ft_rebuild_cmd(str, cmd);
 		if (cmd == NULL)
 			return (NULL);
-		tab = ft_split(cmd, ' ');
+		array = ft_split(cmd, ' ');
 		free(cmd);
-		if (tab == NULL)
+		if (array == NULL)
 			return (NULL);
-		return (tab);
+		return (array);
 	}
-	tab = ft_check_all_path(str, cmd, path);
-	if (tab == NULL)
+	array = ft_check_all_path(str, cmd, path);
+	if (array == NULL)
 		return (NULL);
-	return (tab);
+	return (array);
 }
 
-char	**ft_command(char *str, char **path)
+char	**ft_make_cmd(char *str, char **path)
 {
 	char	**array;
 

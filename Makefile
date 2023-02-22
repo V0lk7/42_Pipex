@@ -6,7 +6,7 @@
 #    By: jduval <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/02 13:27:39 by jduval            #+#    #+#              #
-#    Updated: 2023/02/20 15:41:05 by jduval           ###   ########.fr        #
+#    Updated: 2023/02/22 12:42:13 by jduval           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,16 +28,18 @@ BUILD_DIR 	= 	.build_pipex
 
 SRC_DIR		=	mandatory
 
-SRCS 		:=	main.c	\
-				px_free.c	px_list_utils.c	\
+SRCS 		:=	pipex.c				\
 				px_parsing_path.c	\
-				px_parse_cmd.c	\
-				px_init_list.c	\
-				px_utils.c	\
+				px_parse_cmd.c		\
 				px_single_quote.c	\
-				px_parsing.c	\
-				px_exec_cmds.c	\
-				px_change_fd.c	\
+				px_init_list.c		\
+				px_parsing.c		\
+				px_exec_cmds.c		\
+				px_first_exec.c		\
+				px_last_exec.c		\
+				px_free.c			\
+				px_list_utils.c		\
+				px_utils.c			\
 
 SRCS		:= $(SRCS:%=$(SRC_DIR)/%)
 
