@@ -6,11 +6,15 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 14:38:29 by jduval            #+#    #+#             */
-/*   Updated: 2023/01/10 15:27:21 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/23 12:33:45 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 1
+#endif
 
 int	ft_flag(char *buffer)
 {

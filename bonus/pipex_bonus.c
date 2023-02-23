@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 08:41:01 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/22 15:50:19 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/23 15:06:17 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	main(int argc, char **argv, char **envp)
 {
 	t_cmd	*cmd;
+	int		hdoc;
 
 	if (argc < 5)
 	{
@@ -22,7 +23,17 @@ int	main(int argc, char **argv, char **envp)
 		return (0);
 	}
 	cmd = ft_parsing(argc, argv, envp);
-	ft_build_hdoc(&cmd);
-	ft_loop_on_cmd(cmd, argv, envp);
+	hdoc = ft_build_hdoc(&cmd, argv, argc);
+	if (hdoc == -1 || hdoc == -2)
+	{
+		ft_free_lstcmd(&cmd);
+		if (hdoc == -2)
+			perror(NULL);
+		return (0);
+	}
+	if (hdoc == 0 && argc == 5)
+		ft_loop_on_cmd(cmd, argv, envp);
+	else
+		ft_multpipe_hdoc(cmd, argc, argv, envp);
 	return (0);
 }

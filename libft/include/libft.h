@@ -6,23 +6,19 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 14:21:46 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/15 17:08:58 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/23 12:35:30 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# include <stddef.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
 # include <fcntl.h>
 # include <sys/wait.h>
-
-// BUFFER FOR GNL
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 50
-# endif
 
 typedef enum e_bool
 {
@@ -83,12 +79,15 @@ void		ft_lstdelone(t_list *lst, void (*del)(void *));
 void		ft_lstclear(t_list **lst, void (*del)(void *));
 void		ft_lstiter(t_list *lst, void (*f)(void *));
 t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-//	GET_NEXT_LINE
+int			ft_strcspn(char const *str, char const *reject);
+//			old_gnl
 char		*ft_strjoin_gnl(char *s1, char *s2);
 int			ft_flag(char *buffer);
 void		ft_move(char **buffer, int len);
 int			ft_read_for(char **buffer, int fd);
 char		*get_next_line(int fd);
+//			gnl_v2
+char		*ft_gnl(int fd);
 //	PRINTF
 int			ft_printf(const char *format, ...);
 int			ft_putchar_printf(char c, int fd);

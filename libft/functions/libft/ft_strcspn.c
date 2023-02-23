@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_bonus.h                                      :+:      :+:    :+:   */
+/*   ft_strcspn.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/22 15:34:57 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/23 14:55:54 by jduval           ###   ########.fr       */
+/*   Created: 2023/02/23 11:20:33 by jduval            #+#    #+#             */
+/*   Updated: 2023/02/23 11:21:43 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_BONUS_H
-# define PIPEX_BONUS_H
+#include "libft.h"
 
-# include "pipex.h"
-
-typedef struct s_pipes
+int	ft_strcspn(char const *str, char const *reject)
 {
-	int	pipe1[2];
-	int	pipe2[2];
-}	t_pipes;
+	int	i;
 
-//////////////////////////////////////////////////////////////////////////////
-//								px_parse_hdoc_bonus.c						//
-//////////////////////////////////////////////////////////////////////////////
-void	ft_build_hdoc(t_cmd **cmd);
-
-# endif
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (ft_strchr(reject, str[i]) != NULL)
+			return (i);
+		i++;
+	}
+	return (i);
+}

@@ -6,11 +6,15 @@
 #    By: jduval <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/02 13:27:39 by jduval            #+#    #+#              #
-#    Updated: 2023/02/22 12:42:13 by jduval           ###   ########.fr        #
+#    Updated: 2023/02/23 15:17:45 by jduval           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME 		=	pipex
+ifdef BONUS
+NAME 		=	pipex_bonus
+else
+NAME		= pipex
+endif
 
 MAKEFLAGS	+=	--no-print-directory
 
@@ -24,22 +28,34 @@ INCLUDES	=	libft/include
 
 ###############################################################################
 
+ifdef BONUS
+BUILD_DIR 	= 	.build_pipex_bonus
+else
 BUILD_DIR 	= 	.build_pipex
+endif
 
 SRC_DIR		=	mandatory
 
-SRCS 		:=	pipex.c				\
-				px_parsing_path.c	\
-				px_parse_cmd.c		\
-				px_single_quote.c	\
-				px_init_list.c		\
-				px_parsing.c		\
-				px_exec_cmds.c		\
-				px_first_exec.c		\
-				px_last_exec.c		\
-				px_free.c			\
-				px_list_utils.c		\
-				px_utils.c			\
+SRCS 		:=	px_parsing_path.c		\
+				px_parse_cmd.c			\
+				px_single_quote.c		\
+				px_init_list.c			\
+				px_parsing.c			\
+				px_exec_cmds.c			\
+				px_first_exec.c			\
+				px_last_exec.c			\
+				px_free.c				\
+				px_list_utils.c			\
+				px_utils.c				\
+
+SRCS_BONUS	:=	pipex_bonus.c			\
+				px_parse_hdoc_bonus.c	\
+
+ifdef BONUS
+SRCS+= $(SRCS_BONUS)
+else
+SRCS += pipex.c
+endif
 
 SRCS		:= $(SRCS:%=$(SRC_DIR)/%)
 
@@ -80,7 +96,8 @@ $(BUILD_DIR)/%.o : %.c
 
 -include $(DEPS) test.mk
 
-bonus: 
+bonus:
+	$(MAKE) -C libft/
 	$(MAKE) BONUS=1 all
 .PHONY:bonus
 
@@ -88,12 +105,12 @@ bonus:
 
 clean:
 	@${MAKE} -C libft/ clean
-	rm -rf .build_pipex
+	rm -rf .build_pipex .build_pipex_bonus
 .PHONY:clean
 
-fclean: clean 
+fclean: clean
 	@${MAKE} -C libft/ fclean
-	rm -f pipex
+	rm -f pipex pipex_bonus
 .PHONY: fclean
 
 re: fclean all

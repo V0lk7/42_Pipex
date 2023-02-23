@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:13:57 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/22 14:09:00 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/23 13:39:29 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	ft_last_arg(char **argv)
 	return (i);
 }
 
-int	ft_dispatch_cmd(t_cmd *cmd, char **argv, int *pipefd, char **envp)
+static int	ft_dispatch_cmd(t_cmd *cmd, char **argv, int *pipefd, char **envp)
 {
 	int	index;
 	int	value;
