@@ -6,17 +6,11 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 09:20:05 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/22 14:12:41 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/24 14:23:42 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
-
-static void	ft_quit_first(void)
-{
-	perror(NULL);
-	exit(0);
-}
 
 static int	ft_dup_first_cmd(int *pipefd, int fd)
 {
@@ -53,7 +47,7 @@ static void	ft_exec_first_cmd(t_cmd *cmd, int fd, int *pipefd, char **envp)
 	if (execve(cmd->cmd[0], cmd->cmd, envp) == -1)
 	{
 		ft_free_lstcmd(&cmd);
-		ft_quit_first();
+		ft_error_quit();
 	}
 }
 
@@ -70,17 +64,10 @@ int	ft_first_cmd(t_cmd *cmd, char *file, int *pipefd, char **envp)
 	{
 		ft_close_fds(pipefd[0], pipefd[1], fd);
 		ft_free_lstcmd(&cmd);
-		ft_quit_first();
+		ft_error_quit();
 	}
 	if (pid == 0)
 		ft_exec_first_cmd(cmd, fd, pipefd, envp);
-	if (pid > 0)
-	{
-		if (close(fd) == -1)
-		{
-			ft_free_lstcmd(&cmd);
-			ft_quit_first();
-		}
-	}
+	close(fd);
 	return (1);
 }

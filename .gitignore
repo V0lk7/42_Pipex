@@ -9,3 +9,5 @@ bonus/all_function.c
 bonus/main.c
 bonus/libft.h
 bonus/a.out
+.build_pipex
+pipex_bonus

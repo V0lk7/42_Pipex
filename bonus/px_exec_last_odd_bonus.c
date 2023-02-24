@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   px_exec_last_even_bonus.c                          :+:      :+:    :+:   */
+/*   px_exec_last_odd_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/23 18:09:10 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/24 18:03:41 by jduval           ###   ########.fr       */
+/*   Created: 2023/02/24 13:04:38 by jduval            #+#    #+#             */
+/*   Updated: 2023/02/24 18:03:14 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex_bonus.h"
 
-static int	ft_dup_last_even(t_pipes *fds, int file_fd)
+static int	ft_dup_last_odd(t_pipes *fds, int file_fd)
 {
-	if (dup2(fds->pipe2[0], STDIN_FILENO) == -1)
+	if (dup2(fds->pipe1[0], STDIN_FILENO) == -1)
 	{
 		perror("last even multcmd dup2 n1 ");
 		ft_close_pfd(fds, file_fd);
@@ -26,12 +26,12 @@ static int	ft_dup_last_even(t_pipes *fds, int file_fd)
 		ft_close_pfd(fds, file_fd);
 		return (-1);
 	}
-	close(fds->pipe2[0]);
+	close(fds->pipe1[0]);
 	close(file_fd);
 	return (0);
 }
 
-static void	ft_exec_last_even(t_cmd *cmd, int fd, t_pipes *fds, char **envp)
+static void	ft_exec_last_odd(t_cmd *cmd, int fd, t_pipes *fds, char **envp)
 {
 	if (cmd->valid == -1 || cmd->valid == 2)
 	{
@@ -40,7 +40,7 @@ static void	ft_exec_last_even(t_cmd *cmd, int fd, t_pipes *fds, char **envp)
 		ft_close_pfd(fds, fd);
 		exit(0);
 	}
-	if (ft_dup_last_even(fds, fd) == -1)
+	if (ft_dup_last_odd(fds, fd) == -1)
 	{
 		ft_free_lstcmd(&cmd);
 		exit(0);
@@ -52,7 +52,7 @@ static void	ft_exec_last_even(t_cmd *cmd, int fd, t_pipes *fds, char **envp)
 	}
 }
 
-int	ft_last_even_cmd(t_cmd *cmd, char *file, t_pipes *fds, char **envp)
+int	ft_last_odd_cmd(t_cmd *cmd, char *file, t_pipes *fds, char **envp)
 {
 	int		file_fd;
 	pid_t	pid;
@@ -71,8 +71,8 @@ int	ft_last_even_cmd(t_cmd *cmd, char *file, t_pipes *fds, char **envp)
 		ft_error_quit();
 	}
 	if (pid == 0)
-		ft_exec_last_even(cmd, file_fd, fds, envp);
+		ft_exec_last_odd(cmd, file_fd, fds, envp);
 	close(file_fd);
-	close(fds->pipe1[0]);
+	close(fds->pipe2[0]);
 	return (1);
 }

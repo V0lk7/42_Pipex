@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:13:57 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/23 13:39:29 by jduval           ###   ########.fr       */
+/*   Updated: 2023/02/24 14:08:28 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,6 @@ void	ft_error_cmd(char *str)
 	ft_putstr_fd("Command '", 2);
 	ft_putstr_fd(str, 2);
 	ft_putstr_fd("' not found\n", 2);
-}
-
-static int	ft_last_arg(char **argv)
-{
-	int	i;
-
-	i = 0;
-	while (argv[i] != NULL)
-		i++;
-	if (i > 0)
-		i--;
-	return (i);
 }
 
 static int	ft_dispatch_cmd(t_cmd *cmd, char **argv, int *pipefd, char **envp)
