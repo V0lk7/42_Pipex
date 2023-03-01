@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:34:57 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/24 15:22:09 by jduval           ###   ########.fr       */
+/*   Updated: 2023/03/01 17:03:46 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,12 @@
 
 # include "pipex.h"
 
-typedef struct s_pipes
+typedef struct s_fds
 {
-	int	pipe1[2];
-	int	pipe2[2];
-}	t_pipes;
+	int	pipe[2];
+	int	write;
+	int	read;
+}	t_fds;
 
 //////////////////////////////////////////////////////////////////////////////
 //								px_parse_hdoc_bonus.c						//
@@ -28,27 +29,8 @@ int		ft_build_hdoc(t_cmd *cmd, char **argv, int argc);
 //////////////////////////////////////////////////////////////////////////////
 //								px_exec_cmds_bonus							//
 //////////////////////////////////////////////////////////////////////////////
-void	ft_close_pfd(t_pipes *fds, int fd);
-void	ft_loop_mlt_cmd(t_cmd *cmd, char **argv, char **envp);
-//////////////////////////////////////////////////////////////////////////////
-//								px_exec_first_bonus							//
-//////////////////////////////////////////////////////////////////////////////
-int		ft_first_multcmd(t_cmd *cmd, char *file, t_pipes *fds, char **envp);
-//////////////////////////////////////////////////////////////////////////////
-//								px_exec_inter_even_bonus.c					//
-//////////////////////////////////////////////////////////////////////////////
-int		ft_inter_even_cmd(t_cmd *cmd, t_pipes *fds, char **envp);
-//////////////////////////////////////////////////////////////////////////////
-//								px_exec_inter_odd_bonus.c					//
-//////////////////////////////////////////////////////////////////////////////
-int		ft_inter_odd_cmd(t_cmd *cmd, t_pipes *fds, char **envp);
-//////////////////////////////////////////////////////////////////////////////
-//								px_exec_last_even_bonus.c					//
-//////////////////////////////////////////////////////////////////////////////
-int		ft_last_even_cmd(t_cmd *cmd, char *file, t_pipes *fds, char **envp);
-//////////////////////////////////////////////////////////////////////////////
-//								px_exec_last_odd_bonus.c					//
-//////////////////////////////////////////////////////////////////////////////
-int		ft_last_odd_cmd(t_cmd *cmd, char *file, t_pipes *fds, char **envp);
-
+int		ft_loop_mlt_cmd(t_cmd *cmd, int argc, char **argv, char **envp);
+void	ft_open_fd(t_cmd *cmd, t_fds *fd, char *str);
+void	ft_child(t_fds *fd, t_cmd *cmd, char **envp);
+void	ft_dup_fds(t_fds *fd, t_cmd *cmd);
 #endif

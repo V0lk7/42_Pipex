@@ -6,14 +6,14 @@
 #    By: jduval <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/02 13:27:39 by jduval            #+#    #+#              #
-#    Updated: 2023/02/24 15:18:20 by jduval           ###   ########.fr        #
+#    Updated: 2023/03/01 12:43:14 by jduval           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ifdef BONUS
 NAME 		=	pipex_bonus
 else
-NAME		= pipex
+NAME		= 	pipex
 endif
 
 MAKEFLAGS	+=	--no-print-directory
@@ -52,11 +52,6 @@ SRCS 		:=	px_parsing_path.c		\
 SRCS_BONUS	:=	pipex_bonus.c				\
 				px_parse_hdoc_bonus.c		\
 				px_exec_cmds_bonus.c		\
-				px_exec_first_bonus.c		\
-				px_exec_inter_even_bonus.c	\
-				px_exec_inter_odd_bonus.c	\
-				px_exec_last_even_bonus.c	\
-				px_exec_last_odd_bonus.c	\
 
 SRCS		:=	$(SRCS:%=$(SRC_DIR)/%)
 SRCS_BONUS	:=	$(SRCS_BONUS:%=$(SRC_DIR_BNS)/%)

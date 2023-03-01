@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 08:41:01 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/24 15:21:34 by jduval           ###   ########.fr       */
+/*   Updated: 2023/03/01 12:44:26 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,6 @@ int	main(int argc, char **argv, char **envp)
 	if (hdoc == 0 && argc == 5)
 		ft_loop_on_cmd(cmd, argv, envp);
 	else
-		ft_loop_mlt_cmd(cmd, argv, envp);
+		ft_loop_mlt_cmd(cmd, argc, argv, envp);
 	return (0);
 }
