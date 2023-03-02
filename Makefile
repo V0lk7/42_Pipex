@@ -6,7 +6,7 @@
 #    By: jduval <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/02 13:27:39 by jduval            #+#    #+#              #
-#    Updated: 2023/03/01 12:43:14 by jduval           ###   ########.fr        #
+#    Updated: 2023/03/02 09:34:41 by jduval           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,7 @@ SRCS_BONUS	:=	$(SRCS_BONUS:%=$(SRC_DIR_BNS)/%)
 ifdef BONUS
 SRCS += $(SRCS_BONUS)
 else
-SRCS += pipex.c
+SRCS += mandatory/pipex.c
 endif
 
 OBJS 		= $(SRCS:%.c=$(BUILD_DIR)/%.o)

@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 13:42:11 by jduval            #+#    #+#             */
-/*   Updated: 2023/03/01 17:10:20 by jduval           ###   ########.fr       */
+/*   Updated: 2023/03/02 17:58:56 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	ft_open_fd(t_cmd *cmd, t_fds *fd, char *str)
 		{
 			ft_free_lstcmd(&cmd);
 			if (fd->read > -1)
-				close (fd->read);	
+				close (fd->read);
 			ft_error_quit();
 		}
 		fd->write = fd->pipe[1];
@@ -74,23 +74,26 @@ void	ft_child(t_fds *fd, t_cmd *cmd, char **envp)
 
 void	ft_dup_fds(t_fds *fd, t_cmd *cmd)
 {
-	if (fd->read < 0)
+	if (cmd->valid != -1)
 	{
-		ft_close_fds(fd->pipe[0], fd->write, -1);
-		ft_free_lstcmd(&cmd);
-		exit(0);
-	}
-	if(dup2(fd->read, STDIN_FILENO) == -1)
-	{
-		ft_close_fds(fd->read, fd->write, fd->pipe[0]);
-		ft_free_lstcmd(&cmd);
-		ft_error_quit();
-	}
-	if(dup2(fd->write, STDOUT_FILENO) == -1)
-	{
-		ft_close_fds(fd->read, fd->write, fd->pipe[0]);
-		ft_free_lstcmd(&cmd);
-		ft_error_quit();
+		if (fd->read < 0)
+		{
+			ft_close_fds(fd->pipe[0], fd->write, -1);
+			ft_free_lstcmd(&cmd);
+			exit(0);
+		}
+		if(dup2(fd->read, STDIN_FILENO) == -1)
+		{
+			ft_close_fds(fd->read, fd->write, fd->pipe[0]);
+			ft_free_lstcmd(&cmd);
+			ft_error_quit();
+		}
+		if(dup2(fd->write, STDOUT_FILENO) == -1)
+		{
+			ft_close_fds(fd->read, fd->write, fd->pipe[0]);
+			ft_free_lstcmd(&cmd);
+			ft_error_quit();
+		}
 	}
 	ft_close_fds(fd->read, fd->write, fd->pipe[0]);
 }
