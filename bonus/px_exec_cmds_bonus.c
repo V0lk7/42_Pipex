@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 13:42:11 by jduval            #+#    #+#             */
-/*   Updated: 2023/03/02 17:58:56 by jduval           ###   ########.fr       */
+/*   Updated: 2023/03/03 19:18:30 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,39 @@
 int	ft_loop_mlt_cmd(t_cmd *cmd, int argc, char **argv, char **envp)
 {
 	t_fds	fd;
-	int		wstatus;
 	pid_t	pid;
+	int		wstatus;
 
-	fd.read = open(argv[1], O_RDONLY);
+	fd.read = ft_open_infile(argv[1]);
 	if (fd.read == -1)
-	{
-		perror(NULL);
 		cmd = ft_free_cmd(&cmd);
-	}
 	while (cmd != NULL)
 	{
 		ft_open_fd(cmd, &fd, argv[argc - 1]);
 		pid = fork();
 		if (pid == 0)
 			ft_child(&fd, cmd, envp);
-		cmd = ft_free_cmd(&cmd);
-		ft_close_fds(fd.write, fd.read, -1);
+		if (cmd->next != NULL)
+			ft_close_fds(fd.write, fd.read, -1);
 		fd.read = fd.pipe[0];
+		cmd = ft_free_cmd(&cmd);
 	}
 	waitpid(pid, &wstatus, 0);
 	while (waitpid(-1, NULL, 0) > 0)
 		continue ;
+	ft_close_fds(fd.write, fd.read, -1);
 	return (WEXITSTATUS(wstatus));
+}
+
+int	ft_open_infile(char *file)
+{
+	int	fd;
+
+	fd = open(file, O_RDONLY);
+	printf("%d\n", fd);
+	if (fd == -1)
+		perror(NULL);
+	return (fd);
 }
 
 void	ft_open_fd(t_cmd *cmd, t_fds *fd, char *str)
@@ -59,6 +69,13 @@ void	ft_open_fd(t_cmd *cmd, t_fds *fd, char *str)
 
 void	ft_child(t_fds *fd, t_cmd *cmd, char **envp)
 {
+	if (fd->write == -1)
+	{
+		perror(NULL);
+		ft_close_fds(fd->read, fd->write, fd->pipe[0]);
+		ft_free_lstcmd(&cmd);
+		exit(0);
+	}
 	ft_dup_fds(fd, cmd);
 	if (cmd->valid == -1)
 	{
@@ -74,21 +91,15 @@ void	ft_child(t_fds *fd, t_cmd *cmd, char **envp)
 
 void	ft_dup_fds(t_fds *fd, t_cmd *cmd)
 {
-	if (cmd->valid != -1)
+	if (cmd->valid > -1)
 	{
-		if (fd->read < 0)
-		{
-			ft_close_fds(fd->pipe[0], fd->write, -1);
-			ft_free_lstcmd(&cmd);
-			exit(0);
-		}
-		if(dup2(fd->read, STDIN_FILENO) == -1)
+		if (fd->read > 2 && dup2(fd->read, STDIN_FILENO) == -1)
 		{
 			ft_close_fds(fd->read, fd->write, fd->pipe[0]);
 			ft_free_lstcmd(&cmd);
 			ft_error_quit();
 		}
-		if(dup2(fd->write, STDOUT_FILENO) == -1)
+		if (dup2(fd->write, STDOUT_FILENO) == -1)
 		{
 			ft_close_fds(fd->read, fd->write, fd->pipe[0]);
 			ft_free_lstcmd(&cmd);
