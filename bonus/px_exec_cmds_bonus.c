@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 13:42:11 by jduval            #+#    #+#             */
-/*   Updated: 2023/03/03 19:18:30 by jduval           ###   ########.fr       */
+/*   Updated: 2023/03/03 22:11:28 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ int	ft_loop_mlt_cmd(t_cmd *cmd, int argc, char **argv, char **envp)
 	int		wstatus;
 
 	fd.read = ft_open_infile(argv[1]);
-	if (fd.read == -1)
-		cmd = ft_free_cmd(&cmd);
 	while (cmd != NULL)
 	{
 		ft_open_fd(cmd, &fd, argv[argc - 1]);
@@ -44,7 +42,6 @@ int	ft_open_infile(char *file)
 	int	fd;
 
 	fd = open(file, O_RDONLY);
-	printf("%d\n", fd);
 	if (fd == -1)
 		perror(NULL);
 	return (fd);
@@ -53,7 +50,11 @@ int	ft_open_infile(char *file)
 void	ft_open_fd(t_cmd *cmd, t_fds *fd, char *str)
 {
 	if (cmd->next == NULL)
+	{
 		fd->write = open(str, O_CREAT | O_TRUNC | O_WRONLY, 0644);
+		if (fd->write == -1)
+			perror(NULL);
+	}
 	else
 	{
 		if (pipe(fd->pipe) == -1)
@@ -69,9 +70,8 @@ void	ft_open_fd(t_cmd *cmd, t_fds *fd, char *str)
 
 void	ft_child(t_fds *fd, t_cmd *cmd, char **envp)
 {
-	if (fd->write == -1)
+	if (fd->write == -1 || fd->read == -1)
 	{
-		perror(NULL);
 		ft_close_fds(fd->read, fd->write, fd->pipe[0]);
 		ft_free_lstcmd(&cmd);
 		exit(0);
