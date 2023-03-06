@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 23:25:20 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/24 14:06:26 by jduval           ###   ########.fr       */
+/*   Updated: 2023/03/06 18:32:40 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,14 @@ int	ft_last_arg(char **argv)
 	if (i > 0)
 		i--;
 	return (i);
+}
+
+void	ft_close_fds(int fd1, int fd2, int fd3)
+{
+	if (fd1 > 2)
+		close(fd1);
+	if (fd2 > 2)
+		close(fd2);
+	if (fd3 > 2)
+		close(fd3);
 }

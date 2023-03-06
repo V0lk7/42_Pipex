@@ -6,13 +6,13 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 10:04:43 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/14 13:07:22 by jduval           ###   ########.fr       */
+/*   Updated: 2023/03/06 16:21:24 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
 
-int	ft_find_path(char **envp)
+static int	ft_find_path(char **envp)
 {
 	int	i;
 
@@ -26,7 +26,7 @@ int	ft_find_path(char **envp)
 	return (-1);
 }
 
-char	*ft_remake_path(char *envp)
+static char	*ft_remake_path(char *envp)
 {
 	char	*str;
 	int		len;
@@ -40,7 +40,7 @@ char	*ft_remake_path(char *envp)
 	return (str);
 }
 
-char	**ft_build_envp(char *str)
+static char	**ft_build_envp(char *str)
 {
 	char	**path;
 	int		i;
@@ -59,6 +59,16 @@ char	**ft_build_envp(char *str)
 	return (path);
 }
 
+static char	**ft_empty_path(void)
+{
+	char	**path;
+
+	path = ft_calloc(sizeof(char *), 2);
+	if (path == NULL)
+		exit(0);
+	return (path);
+}
+
 char	**ft_envp_to_path(char **envp)
 {
 	char	**path;
@@ -68,8 +78,8 @@ char	**ft_envp_to_path(char **envp)
 	index = ft_find_path(envp);
 	if (index == -1)
 	{
-		ft_printf("PATH not found\n");
-		exit (0);
+		path = ft_empty_path();
+		return (path);
 	}
 	str = ft_remake_path(envp[index]);
 	if (str == NULL)

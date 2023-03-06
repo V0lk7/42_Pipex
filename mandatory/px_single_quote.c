@@ -6,13 +6,13 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:51:34 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/22 11:45:29 by jduval           ###   ########.fr       */
+/*   Updated: 2023/03/06 16:27:38 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
 
-char	*ft_put_space(char *str)
+static char	*ft_put_space(char *str)
 {
 	int		len;
 	int		i;
@@ -29,7 +29,7 @@ char	*ft_put_space(char *str)
 	return (new);
 }
 
-char	*ft_rebuild_str(char **old_cmd)
+static char	*ft_rebuild_str(char **old_cmd)
 {
 	char	*reset;
 	int		i;
@@ -47,7 +47,7 @@ char	*ft_rebuild_str(char **old_cmd)
 	return (reset);
 }
 
-void	ft_put_flag(char **reset)
+static void	ft_put_flag(char **reset)
 {
 	int	i;
 
@@ -68,7 +68,7 @@ void	ft_put_flag(char **reset)
 	}
 }
 
-char	**ft_build_cmd(char *reset)
+static char	**ft_build_cmd(char *reset)
 {
 	int		i;
 	int		j;

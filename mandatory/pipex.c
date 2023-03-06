@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 08:41:01 by jduval            #+#    #+#             */
-/*   Updated: 2023/02/22 14:26:33 by jduval           ###   ########.fr       */
+/*   Updated: 2023/03/06 17:21:32 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	main(int argc, char **argv, char **envp)
 {
 	t_cmd	*cmd;
+	int		status;
 
 	if (argc != 5)
 	{
@@ -22,6 +23,6 @@ int	main(int argc, char **argv, char **envp)
 		return (0);
 	}
 	cmd = ft_parsing(argc, argv, envp);
-	ft_loop_on_cmd(cmd, argv, envp);
-	return (0);
+	status = ft_exec_mandatory(cmd, argc, argv, envp);
+	return (status);
 }
