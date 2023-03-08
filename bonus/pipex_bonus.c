@@ -6,31 +6,11 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 08:41:01 by jduval            #+#    #+#             */
-/*   Updated: 2023/03/06 17:51:26 by jduval           ###   ########.fr       */
+/*   Updated: 2023/03/08 10:57:49 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex_bonus.h"
-
-static	void	ft_display(t_cmd *cmd)
-{
-	t_cmd	*tmp;
-	int		i;
-
-	tmp = cmd;
-	while (tmp != NULL)
-	{
-		i = 0;
-		ft_printf("position = %d\n", tmp->position);
-		ft_printf("valid = %d\n", tmp->valid);
-		while (tmp->cmd[i] != NULL)
-		{
-			ft_printf("%s\n", tmp->cmd[i]);
-			i++;
-		}
-		tmp = tmp->next;
-	}
-}
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -45,7 +25,6 @@ int	main(int argc, char **argv, char **envp)
 	}
 	cmd = ft_parsing(argc, argv, envp);
 	hdoc = ft_build_hdoc(cmd, argv, argc);
-	ft_display(cmd);
 	if (hdoc == -1)
 	{
 		ft_free_lstcmd(&cmd);

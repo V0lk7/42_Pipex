@@ -6,37 +6,38 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:49:36 by jduval            #+#    #+#             */
-/*   Updated: 2023/03/06 18:55:46 by jduval           ###   ########.fr       */
+/*   Updated: 2023/03/08 12:04:00 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex_bonus.h"
 
-void	ft_fill_pipe(t_fds *fds, t_cmd *cmd, char *hdoc)
+void	ft_fill_pipe(t_fds *fds, t_cmd *cmd)
 {
 	char	*input;
 	int		fd;
 	int		len;
 
-	fd = open(hdoc, O_RDONLY);
-	if (fd == -1)
-		fd = STDIN_FILENO;
+	fd = STDIN_FILENO;
 	len = ft_strlen(cmd->cmd[0]);
 	input = ft_gnl(fd);
-	while (ft_strncmp(input, cmd->cmd[0], len - 1) != 0)
+	while (input)
 	{
+		if (ft_strncmp(input, cmd->cmd[0], len) == 0)
+		{
+			free(input);
+			break ;
+		}
 		ft_putstr_fd(input, fds->write);
 		free(input);
 		input = ft_gnl(STDIN_FILENO);
-		if (input == NULL)
-		{
-			ft_free_lstcmd(&cmd);
-			ft_close_fds(fds->write, fds->read, fd);
-			exit(0);
-		}
 	}
-	if (fd > 2)
-		close(fd);
+	if (input == NULL)
+	{
+		ft_free_lstcmd(&cmd);
+		ft_close_fds(fds->write, fds->read, fd);
+		exit(0);
+	}
 }
 
 static void	ft_last_valid_hdoc(t_cmd *cmd)
@@ -51,6 +52,20 @@ static void	ft_last_valid_hdoc(t_cmd *cmd)
 		tmp->valid = 2;
 }
 
+static char	*ft_limiter(char *str)
+{
+	char	*limiter;
+	int		len;
+
+	len = ft_strlen(str);
+	limiter = ft_calloc(len + 2, sizeof(char));
+	if (limiter == NULL)
+		return (NULL);
+	ft_strlcpy(limiter, str, len + 1);
+	limiter[len + 1] = '\n';
+	return (limiter);
+}
+
 int	ft_build_hdoc(t_cmd *cmd, char **argv, int argc)
 {
 	if (strncmp(argv[1], "here_doc", 8) != 0)
@@ -61,7 +76,7 @@ int	ft_build_hdoc(t_cmd *cmd, char **argv, int argc)
 	cmd->cmd = malloc(sizeof(char *) * 2);
 	if (cmd->cmd == NULL)
 		return (-1);
-	cmd->cmd[0] = ft_strdup(argv[2]);
+	cmd->cmd[0] = ft_limiter(argv[2]);
 	if (cmd->cmd[0] == NULL)
 		return (-1);
 	cmd->cmd[1] = NULL;
