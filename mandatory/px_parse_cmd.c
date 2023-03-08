@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 15:44:32 by jduval            #+#    #+#             */
-/*   Updated: 2023/03/06 16:26:44 by jduval           ###   ########.fr       */
+/*   Updated: 2023/03/08 16:47:12 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,8 @@ char	**ft_make_cmd(char *str, char **path)
 		array[1] = NULL;
 		return (array);
 	}
+	else if (ft_isalpha(str[0]) == 0)
+		array = ft_wrong_cmd(str);
 	else
 		array = ft_check_cmd(str, path);
 	return (array);

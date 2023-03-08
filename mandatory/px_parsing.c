@@ -6,11 +6,25 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 13:54:48 by jduval            #+#    #+#             */
-/*   Updated: 2023/03/06 17:12:23 by jduval           ###   ########.fr       */
+/*   Updated: 2023/03/08 16:42:03 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
+
+char	**ft_wrong_cmd(char *str)
+{
+	char	**cmd;
+
+	cmd = malloc(sizeof(char *) * 2);
+	if (cmd == NULL)
+		return (NULL);
+	cmd[0] = ft_strdup(str);
+	if (cmd[0] == NULL)
+		return (NULL);
+	cmd[1] = NULL;
+	return (cmd);
+}
 
 void	ft_error_cmd(char *str)
 {

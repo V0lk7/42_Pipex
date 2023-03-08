@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 23:25:20 by jduval            #+#    #+#             */
-/*   Updated: 2023/03/06 18:32:40 by jduval           ###   ########.fr       */
+/*   Updated: 2023/03/08 16:39:16 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	ft_find_quotes(char *str)
 
 	i = 0;
 	quote = 0;
-	if (!str)
+	if (str == NULL)
 		return (0);
 	while (str[i])
 	{

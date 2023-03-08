@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:49:36 by jduval            #+#    #+#             */
-/*   Updated: 2023/03/08 12:04:00 by jduval           ###   ########.fr       */
+/*   Updated: 2023/03/08 16:54:10 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	ft_fill_pipe(t_fds *fds, t_cmd *cmd)
 	input = ft_gnl(fd);
 	while (input)
 	{
-		if (ft_strncmp(input, cmd->cmd[0], len) == 0)
+		if (ft_strncmp(input, cmd->cmd[0], len) == 0
+			&& ft_strlen(cmd->cmd[0]) == ft_strlen(input))
 		{
 			free(input);
 			break ;
@@ -62,7 +63,8 @@ static char	*ft_limiter(char *str)
 	if (limiter == NULL)
 		return (NULL);
 	ft_strlcpy(limiter, str, len + 1);
-	limiter[len + 1] = '\n';
+	limiter[len] = '\n';
+	printf("%s", limiter);
 	return (limiter);
 }
 

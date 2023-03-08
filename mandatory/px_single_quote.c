@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:51:34 by jduval            #+#    #+#             */
-/*   Updated: 2023/03/06 16:27:38 by jduval           ###   ########.fr       */
+/*   Updated: 2023/03/08 16:40:15 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ char	**ft_single_quote(char *str, char **cmd)
 	int		quote;
 
 	quote = ft_find_quotes(str);
-	if (quote == 0 || quote % 2 != 0)
+	if (quote == 0 || quote % 2 != 0 || cmd == NULL)
 		return (cmd);
 	reset = ft_rebuild_str(cmd);
 	ft_free_array(cmd);
