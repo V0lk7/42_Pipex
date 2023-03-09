@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:49:36 by jduval            #+#    #+#             */
-/*   Updated: 2023/03/08 16:54:10 by jduval           ###   ########.fr       */
+/*   Updated: 2023/03/09 09:59:43 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,25 +64,27 @@ static char	*ft_limiter(char *str)
 		return (NULL);
 	ft_strlcpy(limiter, str, len + 1);
 	limiter[len] = '\n';
-	printf("%s", limiter);
 	return (limiter);
 }
 
 int	ft_build_hdoc(t_cmd *cmd, char **argv, int argc)
 {
-	if (strncmp(argv[1], "here_doc", 8) != 0)
-		return (0);
-	if (argc < 6)
-		return (-1);
-	ft_free_array(cmd->cmd);
-	cmd->cmd = malloc(sizeof(char *) * 2);
-	if (cmd->cmd == NULL)
-		return (-1);
-	cmd->cmd[0] = ft_limiter(argv[2]);
-	if (cmd->cmd[0] == NULL)
-		return (-1);
-	cmd->cmd[1] = NULL;
-	cmd->valid = 1;
-	ft_last_valid_hdoc(cmd);
-	return (1);
+	if (strncmp(argv[1], "here_doc", 8) == 0
+		&& ft_strlen("here_doc") == ft_strlen(argv[1]))
+	{
+		if (argc < 6)
+			return (-1);
+		ft_free_array(cmd->cmd);
+		cmd->cmd = malloc(sizeof(char *) * 2);
+		if (cmd->cmd == NULL)
+			return (-1);
+		cmd->cmd[0] = ft_limiter(argv[2]);
+		if (cmd->cmd[0] == NULL)
+			return (-1);
+		cmd->cmd[1] = NULL;
+		cmd->valid = 1;
+		ft_last_valid_hdoc(cmd);
+		return (1);
+	}
+	return (0);
 }
