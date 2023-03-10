@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 08:41:01 by jduval            #+#    #+#             */
-/*   Updated: 2023/03/08 16:27:28 by jduval           ###   ########.fr       */
+/*   Updated: 2023/03/10 18:06:16 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	main(int argc, char **argv, char **envp)
 		return (0);
 	}
 	cmd = ft_parsing(argc, argv, envp);
-	printf("valid = %d\n, cmd = %s\n", cmd->valid, cmd->cmd[0]);
 	status = ft_exec_mandatory(cmd, argc, argv, envp);
 	return (status);
 }
